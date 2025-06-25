@@ -23,7 +23,13 @@ export function Navigation() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('hero');
   const [isHovered, setIsHovered] = useState(false);
-  const { theme, setTheme } = useTheme();
+  const [mounted, setMounted] = useState(false);
+  const { theme, setTheme, resolvedTheme } = useTheme();
+
+  // Ensure component is mounted before accessing theme
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   useEffect(() => {
     const onScroll = () => setIsScrolled(window.scrollY > 20);
@@ -50,9 +56,14 @@ export function Navigation() {
     if (el) el.scrollIntoView({ behavior: 'smooth' });
     setIsMobileMenuOpen(false);
   };
+  
   const toTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
     setIsMobileMenuOpen(false);
+  };
+
+  const toggleTheme = () => {
+    setTheme(resolvedTheme === 'dark' ? 'light' : 'dark');
   };
 
   const letterVariants = {
@@ -80,6 +91,11 @@ export function Navigation() {
     hover: { scale: 1.05, color: '#6b7280', transition: { duration: 0.2 } }
   };
 
+  // Don't render until mounted to avoid hydration mismatch
+  if (!mounted) return null;
+
+  const isDark = resolvedTheme === 'dark';
+
   return (
     <>
       <motion.header
@@ -88,8 +104,8 @@ export function Navigation() {
         className={cn(
           'fixed top-0 left-0 right-0 z-[9999] transition-all duration-500',
           isScrolled
-            ? 'bg-white/95 backdrop-blur-lg shadow-lg border-b border-gray-200/50'
-            : 'bg-white/90 backdrop-blur-sm'
+            ? 'bg-white/95 dark:bg-gray-900/95 backdrop-blur-lg shadow-lg border-b border-gray-200/50 dark:border-gray-700/50'
+            : 'bg-white/90 dark:bg-gray-900/90 backdrop-blur-sm'
         )}
       >
         <nav className="container-custom h-20 flex items-center justify-between">
@@ -126,7 +142,7 @@ export function Navigation() {
                 {['D','O','M','S'].map((l, i) => (
                   <motion.span key={i} custom={i} variants={letterVariants} initial="initial"
                     animate="animate" whileHover="hover"
-                    className="text-xl md:text-2xl font-bold font-heading text-gray-900 cursor-pointer inline-block"
+                    className="text-xl md:text-2xl font-bold font-heading text-gray-900 dark:text-white cursor-pointer inline-block"
                     style={{ display: 'inline-block', transformOrigin: 'center bottom', transformStyle: 'preserve-3d' }}
                   >
                     {l}
@@ -134,12 +150,12 @@ export function Navigation() {
                 ))}
 
                 <motion.span variants={globalVariants} initial="initial" animate="animate" whileHover="hover"
-                  className="ml-2 text-xl md:text-2xl font-bold font-heading text-gray-900 cursor-pointer relative">
+                  className="ml-2 text-xl md:text-2xl font-bold font-heading text-gray-900 dark:text-white cursor-pointer relative">
                   GLOBAL
                 </motion.span>
               </motion.div>
               <motion.span variants={taglineVariants} initial="initial" animate="animate" whileHover="hover"
-                className="text-xs text-gray-800/90 hidden sm:block leading-none mt-1 font-medium tracking-wide">
+                className="text-xs text-gray-800/90 dark:text-gray-200/90 hidden sm:block leading-none mt-1 font-medium tracking-wide">
                 Holistic Revenue Generating Company
               </motion.span>
             </div>
@@ -154,8 +170,10 @@ export function Navigation() {
                 transition={{ delay: 0.2 + idx * 0.1 }}
                 onClick={() => scrollTo(item.href)}
                 className={cn(
-                  'relative px-4 py-2 text-sm font-medium transition-all duration-300 hover:text-orange-600',
-                  activeSection === item.href.replace('#','') ? 'text-gray-900 font-semibold' : 'text-gray-600'
+                  'relative px-4 py-2 text-sm font-medium transition-all duration-300 hover:text-orange-600 dark:hover:text-orange-400',
+                  activeSection === item.href.replace('#','') 
+                    ? 'text-gray-900 dark:text-white font-semibold' 
+                    : 'text-gray-600 dark:text-gray-300'
                 )}
                 whileHover={{ y: -2, scale: 1.05 }} whileTap={{ scale: 0.95 }}
               >
@@ -170,43 +188,89 @@ export function Navigation() {
 
           {/* Theme & Mobile Toggle */}
           <div className="flex items-center space-x-4">
-            <motion.div
-              onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
-              className="relative w-14 h-8 rounded-full cursor-pointer border-2 border-gray-300 dark:border-gray-600 bg-gray-200 dark:bg-zinc-800 overflow-hidden"
-              initial={false}
-              animate={{ backgroundColor: theme === 'dark' ? '#1f2937' : '#f3f4f6' }}
+            {/* Enhanced Theme Toggle */}
+            <motion.button
+              onClick={toggleTheme}
+              className="relative w-16 h-8 rounded-full cursor-pointer border-2 border-gray-300 dark:border-gray-600 bg-gradient-to-r from-blue-100 to-yellow-100 dark:from-gray-700 dark:to-gray-800 overflow-hidden shadow-inner"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              aria-label={`Switch to ${isDark ? 'light' : 'dark'} mode`}
             >
+              {/* Background gradient animation */}
+              <motion.div
+                className="absolute inset-0 bg-gradient-to-r from-yellow-200 via-orange-200 to-red-200 dark:from-indigo-900 dark:via-purple-900 dark:to-blue-900"
+                animate={{
+                  opacity: isDark ? 0.8 : 0.6,
+                }}
+                transition={{ duration: 0.3 }}
+              />
+
               {/* Animated wave burst */}
               <motion.div
-                key={theme}
+                key={theme + 'burst'}
                 initial={{ scale: 0, opacity: 0.8 }}
                 animate={{ scale: 2.5, opacity: 0 }}
                 transition={{ duration: 0.6 }}
-                className="absolute inset-0 rounded-full bg-yellow-300/30 dark:bg-slate-100/20 pointer-events-none"
+                className={cn(
+                  "absolute inset-0 rounded-full pointer-events-none",
+                  isDark ? "bg-slate-100/20" : "bg-yellow-300/30"
+                )}
               />
 
-              {/* Toggle Knob */}
+              {/* Toggle Knob with smooth transition */}
               <motion.div
-                layout
-                transition={{ type: 'spring', stiffness: 500, damping: 30 }}
-                className={`absolute top-1 left-1 h-6 w-6 rounded-full bg-white shadow-md flex items-center justify-center
-                ${theme === 'dark' ? 'translate-x-6' : 'translate-x-0'}`}
+                animate={{
+                  x: isDark ? 32 : 4,
+                }}
+                transition={{ 
+                  type: 'spring', 
+                  stiffness: 500, 
+                  damping: 30,
+                  duration: 0.3 
+                }}
+                className="absolute top-1 h-6 w-6 rounded-full bg-white dark:bg-gray-100 shadow-lg flex items-center justify-center border border-gray-200 dark:border-gray-300"
               >
-                {theme === 'dark' ? (
-                  <Moon className="h-4 w-4 text-gray-800" />
-                ) : (
-                  <Sun className="h-4 w-4 text-yellow-500" />
-                )}
+                <motion.div
+                  animate={{ 
+                    rotate: isDark ? 360 : 0,
+                    scale: isDark ? 1 : 1.1 
+                  }}
+                  transition={{ duration: 0.3 }}
+                >
+                  {isDark ? (
+                    <Moon className="h-3 w-3 text-indigo-600" />
+                  ) : (
+                    <Sun className="h-3 w-3 text-yellow-600" />
+                  )}
+                </motion.div>
               </motion.div>
-            </motion.div>
+
+              {/* Background stars for dark mode */}
+              {isDark && (
+                <motion.div
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  className="absolute inset-0 pointer-events-none"
+                >
+                  <div className="absolute top-2 left-2 w-1 h-1 bg-white rounded-full opacity-60"></div>
+                  <div className="absolute top-3 right-3 w-0.5 h-0.5 bg-white rounded-full opacity-40"></div>
+                  <div className="absolute bottom-2 left-3 w-0.5 h-0.5 bg-white rounded-full opacity-50"></div>
+                </motion.div>
+              )}
+            </motion.button>
 
             {/* Mobile Menu Toggle Button */}
             <button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
               aria-label="Toggle menu"
-              className="md:hidden p-2 rounded-md text-gray-700 hover:text-orange-600 focus:outline-none focus:ring-2 focus:ring-orange-500"
+              className="md:hidden p-2 rounded-md text-gray-700 dark:text-gray-300 hover:text-orange-600 dark:hover:text-orange-400 focus:outline-none focus:ring-2 focus:ring-orange-500"
             >
-              {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+              <motion.div
+                animate={{ rotate: isMobileMenuOpen ? 180 : 0 }}
+                transition={{ duration: 0.3 }}
+              >
+                {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+              </motion.div>
             </button>
           </div>
         </nav>
@@ -215,10 +279,12 @@ export function Navigation() {
       {/* Mobile Menu */}
       <AnimatePresence>
         {isMobileMenuOpen && (
-          <motion.div initial={{ opacity: 0, height: 0, y: -20 }}
-            animate={{ opacity: 1, height: 'auto', y: 0 }} exit={{ opacity: 0, height: 0, y: -20 }}
+          <motion.div 
+            initial={{ opacity: 0, height: 0, y: -20 }}
+            animate={{ opacity: 1, height: 'auto', y: 0 }} 
+            exit={{ opacity: 0, height: 0, y: -20 }}
             transition={{ duration: 0.3, ease: 'easeInOut' }}
-            className="fixed top-20 left-0 right-0 z-50 bg-white/95 backdrop-blur-lg border-b border-gray-200/50 md:hidden pointer-events-auto shadow-lg"
+            className="fixed top-20 left-0 right-0 z-50 bg-white/95 dark:bg-gray-900/95 backdrop-blur-lg border-b border-gray-200/50 dark:border-gray-700/50 md:hidden pointer-events-auto shadow-lg"
           >
             <div className="container-custom py-6">
               <nav className="space-y-2">
@@ -229,8 +295,10 @@ export function Navigation() {
                     transition={{ delay: idx * 0.1 }}
                     onClick={() => scrollTo(item.href)}
                     className={cn(
-                      'block w-full text-left px-4 py-3 text-lg font-medium transition-all duration-300 hover:text-orange-600 hover:bg-gradient-to-r hover:from-orange-50 hover:to-red-50 rounded-lg',
-                      activeSection === item.href.replace('#','') ? 'text-orange-600 bg-gradient-to-r from-orange-50 to-red-50' : 'text-gray-700'
+                      'block w-full text-left px-4 py-3 text-lg font-medium transition-all duration-300 hover:text-orange-600 dark:hover:text-orange-400 hover:bg-gradient-to-r hover:from-orange-50 hover:to-red-50 dark:hover:from-orange-900/20 dark:hover:to-red-900/20 rounded-lg',
+                      activeSection === item.href.replace('#','') 
+                        ? 'text-orange-600 dark:text-orange-400 bg-gradient-to-r from-orange-50 to-red-50 dark:from-orange-900/20 dark:to-red-900/20' 
+                        : 'text-gray-700 dark:text-gray-300'
                     )}
                     whileHover={{ x: 4 }} whileTap={{ scale: 0.98 }}
                   >
