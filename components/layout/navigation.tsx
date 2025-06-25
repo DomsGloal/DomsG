@@ -6,57 +6,78 @@ import { Menu, X, Sun, Moon } from 'lucide-react';
 import { useTheme } from 'next-themes';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
+import Image from 'next/image';
+import DomsLogo from '../../lib/DOMS-logo1.png';
 
 const navItems = [
   { name: 'Home', href: '#hero' },
   { name: 'Services', href: '#services' },
   { name: 'About', href: '#about' },
   { name: 'Contact', href: '#contact' },
+  { name: 'Industries', href: '#industries' },
+  { name: 'Insights', href: '#insights' },
 ];
 
 export function Navigation() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('hero');
+  const [isHovered, setIsHovered] = useState(false);
   const { theme, setTheme } = useTheme();
 
   useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 20);
-    };
-
-    const handleSectionChange = () => {
-      const sections = ['hero', 'services', 'about', 'contact'];
-      const currentSection = sections.find(section => {
-        const element = document.getElementById(section);
-        if (element) {
-          const rect = element.getBoundingClientRect();
-          return rect.top <= 100 && rect.bottom >= 100;
-        }
-        return false;
+    const onScroll = () => setIsScrolled(window.scrollY > 20);
+    const onSection = () => {
+      const sections = ['hero','services','about','contact','industries','insights'];
+      const cur = sections.find(sec => {
+        const el = document.getElementById(sec);
+        if (!el) return false;
+        const r = el.getBoundingClientRect();
+        return r.top <= 100 && r.bottom >= 100;
       });
-      
-      if (currentSection) {
-        setActiveSection(currentSection);
-      }
+      if (cur) setActiveSection(cur);
     };
-
-    window.addEventListener('scroll', handleScroll);
-    window.addEventListener('scroll', handleSectionChange);
-    
+    window.addEventListener('scroll', onScroll);
+    window.addEventListener('scroll', onSection);
     return () => {
-      window.removeEventListener('scroll', handleScroll);
-      window.removeEventListener('scroll', handleSectionChange);
+      window.removeEventListener('scroll', onScroll);
+      window.removeEventListener('scroll', onSection);
     };
   }, []);
 
-  const scrollToSection = (href: string) => {
-    const elementId = href.replace('#', '');
-    const element = document.getElementById(elementId);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
-      setIsMobileMenuOpen(false);
+  const scrollTo = (href: string) => {
+    const el = document.getElementById(href.replace('#',''));
+    if (el) el.scrollIntoView({ behavior: 'smooth' });
+    setIsMobileMenuOpen(false);
+  };
+  const toTop = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    setIsMobileMenuOpen(false);
+  };
+
+  const letterVariants = {
+    initial: { opacity: 0, y: 20, rotateX: -90, scale: 0.8 },
+    animate: (i: number) => ({
+      opacity: 1, y: 0, rotateX: 0, scale: 1,
+      transition: { delay: 0.5 + i * 0.15, duration: 0.8, type: 'spring', stiffness: 200, damping: 12 }
+    }),
+    hover: {
+      y: -8, scale: 1.2, color: '#fd4f00',
+      textShadow: '0 0 20px rgba(253,79,0,0.5)',
+      transition: { duration: 0.3, type: 'spring', stiffness: 400, damping: 10 }
     }
+  };
+
+  const globalVariants = {
+    initial: { opacity: 0, x: -20, scale: 0.9 },
+    animate: { opacity: 1, x: 0, scale: 1, transition: { delay: 1.2, duration: 0.8, type: 'spring', stiffness: 150, damping: 12 } },
+    hover: { scale: 1.1, color: '#fd4f00', textShadow: '0 0 15px rgba(253,79,0,0.3)', transition: { duration: 0.3, type: 'spring', stiffness: 300 } }
+  };
+
+  const taglineVariants = {
+    initial: { opacity: 0, scale: 0.8, y: 10 },
+    animate: { opacity: 1, scale: 1, y: 0, transition: { delay: 1.8, duration: 0.6, ease: 'easeOut' } },
+    hover: { scale: 1.05, color: '#6b7280', transition: { duration: 0.2 } }
   };
 
   return (
@@ -65,83 +86,128 @@ export function Navigation() {
         initial={{ y: -100 }}
         animate={{ y: 0 }}
         className={cn(
-          'fixed top-0 left-0 right-0 z-50 transition-all duration-500',
+          'fixed top-0 left-0 right-0 z-[9999] transition-all duration-500',
           isScrolled
-            ? 'bg-background/95 backdrop-blur-md border-b border-border shadow-lg'
-            : 'bg-transparent'
+            ? 'bg-white/95 backdrop-blur-lg shadow-lg border-b border-gray-200/50'
+            : 'bg-white/90 backdrop-blur-sm'
         )}
       >
         <nav className="container-custom h-20 flex items-center justify-between">
-          {/* Logo */}
-          <motion.div
+          <motion.button
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 0.1 }}
-            className="flex items-center space-x-3"
+            onClick={toTop}
+            className="flex items-center space-x-4 cursor-pointer group"
+            onHoverStart={() => setIsHovered(true)}
+            onHoverEnd={() => setIsHovered(false)}
           >
-            <div className="w-10 h-10 bg-gradient-to-br from-primary to-secondary rounded-lg flex items-center justify-center">
-              <span className="text-white font-bold text-xl font-heading">D</span>
-            </div>
-            <span className="text-2xl font-bold font-heading text-foreground">
-              DOMS Global
-            </span>
-          </motion.div>
+            <motion.div
+              whileHover={{ scale: 1.1, rotate: [0, -5, 5, 0], filter: 'drop-shadow(0 4px 8px rgba(253,79,0,0.3))' }}
+              whileTap={{ scale: 0.95 }}
+              transition={{ rotate: { duration: 0.6 }, scale: { duration: 0.2 } }}
+              className="relative"
+            >
+              <Image src={DomsLogo} alt="DOMS Global Logo" width={50} height={50}
+                className="h-10 w-10 md:h-12 md:w-12 object-contain transition-all duration-300" priority />
+              <motion.div
+                className="absolute inset-0 rounded-full border-2 border-orange-500/0 pointer-events-none"
+                animate={isHovered ? {
+                  scale: [1, 1.2, 1],
+                  borderColor: ['rgba(253,79,0,0)', 'rgba(253,79,0,0.6)', 'rgba(253,79,0,0)'],
+                } : {}}
+                transition={{ duration: 1.5, repeat: isHovered ? Infinity : 0 }}
+              />
+            </motion.div>
+            <div className="flex flex-col">
+              <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.3, duration: 0.6 }} className="flex items-center relative">
+                {/* Animated 'DOMS' letters */}
+                {['D','O','M','S'].map((l, i) => (
+                  <motion.span key={i} custom={i} variants={letterVariants} initial="initial"
+                    animate="animate" whileHover="hover"
+                    className="text-xl md:text-2xl font-bold font-heading text-gray-900 cursor-pointer inline-block"
+                    style={{ display: 'inline-block', transformOrigin: 'center bottom', transformStyle: 'preserve-3d' }}
+                  >
+                    {l}
+                  </motion.span>
+                ))}
 
-          {/* Desktop Navigation */}
+                <motion.span variants={globalVariants} initial="initial" animate="animate" whileHover="hover"
+                  className="ml-2 text-xl md:text-2xl font-bold font-heading text-gray-900 cursor-pointer relative">
+                  GLOBAL
+                </motion.span>
+              </motion.div>
+              <motion.span variants={taglineVariants} initial="initial" animate="animate" whileHover="hover"
+                className="text-xs text-gray-800/90 hidden sm:block leading-none mt-1 font-medium tracking-wide">
+                Holistic Revenue Generating Company
+              </motion.span>
+            </div>
+          </motion.button>
+
+          {/* Desktop Links */}
           <div className="hidden md:flex items-center space-x-8">
-            {navItems.map((item, index) => (
-              <motion.button
-                key={item.name}
+            {navItems.map((item, idx) => (
+              <motion.button key={item.name}
                 initial={{ opacity: 0, y: -20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.2 + index * 0.1 }}
-                onClick={() => scrollToSection(item.href)}
+                transition={{ delay: 0.2 + idx * 0.1 }}
+                onClick={() => scrollTo(item.href)}
                 className={cn(
-                  'relative px-4 py-2 text-sm font-medium transition-colors hover:text-primary',
-                  activeSection === item.href.replace('#', '')
-                    ? 'text-primary'
-                    : 'text-muted-foreground'
+                  'relative px-4 py-2 text-sm font-medium transition-all duration-300 hover:text-orange-600',
+                  activeSection === item.href.replace('#','') ? 'text-gray-900 font-semibold' : 'text-gray-600'
                 )}
+                whileHover={{ y: -2, scale: 1.05 }} whileTap={{ scale: 0.95 }}
               >
                 {item.name}
-                {activeSection === item.href.replace('#', '') && (
-                  <motion.div
-                    layoutId="activeTab"
-                    className="absolute bottom-0 left-0 right-0 h-0.5 bg-primary"
-                    initial={false}
-                    transition={{ type: 'spring', stiffness: 500, damping: 30 }}
-                  />
+                {activeSection === item.href.replace('#','') && (
+                  <motion.div layoutId="activeTab"
+                    className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-orange-600 to-red-500 rounded-full" />
                 )}
               </motion.button>
             ))}
           </div>
 
-          {/* Theme Toggle & Mobile Menu */}
+          {/* Theme & Mobile Toggle */}
           <div className="flex items-center space-x-4">
-            <Button
-              variant="ghost"
-              size="icon"
+            <motion.div
               onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
-              className="w-9 h-9"
+              className="relative w-14 h-8 rounded-full cursor-pointer border-2 border-gray-300 dark:border-gray-600 bg-gray-200 dark:bg-zinc-800 overflow-hidden"
+              initial={false}
+              animate={{ backgroundColor: theme === 'dark' ? '#1f2937' : '#f3f4f6' }}
             >
-              <Sun className="h-4 w-4 rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
-              <Moon className="absolute h-4 w-4 rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
-              <span className="sr-only">Toggle theme</span>
-            </Button>
+              {/* Animated wave burst */}
+              <motion.div
+                key={theme}
+                initial={{ scale: 0, opacity: 0.8 }}
+                animate={{ scale: 2.5, opacity: 0 }}
+                transition={{ duration: 0.6 }}
+                className="absolute inset-0 rounded-full bg-yellow-300/30 dark:bg-slate-100/20 pointer-events-none"
+              />
 
-            {/* Mobile Menu Button */}
-            <Button
-              variant="ghost"
-              size="icon"
-              className="md:hidden w-9 h-9"
+              {/* Toggle Knob */}
+              <motion.div
+                layout
+                transition={{ type: 'spring', stiffness: 500, damping: 30 }}
+                className={`absolute top-1 left-1 h-6 w-6 rounded-full bg-white shadow-md flex items-center justify-center
+                ${theme === 'dark' ? 'translate-x-6' : 'translate-x-0'}`}
+              >
+                {theme === 'dark' ? (
+                  <Moon className="h-4 w-4 text-gray-800" />
+                ) : (
+                  <Sun className="h-4 w-4 text-yellow-500" />
+                )}
+              </motion.div>
+            </motion.div>
+
+            {/* Mobile Menu Toggle Button */}
+            <button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+              aria-label="Toggle menu"
+              className="md:hidden p-2 rounded-md text-gray-700 hover:text-orange-600 focus:outline-none focus:ring-2 focus:ring-orange-500"
             >
-              {isMobileMenuOpen ? (
-                <X className="h-5 w-5" />
-              ) : (
-                <Menu className="h-5 w-5" />
-              )}
-            </Button>
+              {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+            </button>
           </div>
         </nav>
       </motion.header>
@@ -149,27 +215,24 @@ export function Navigation() {
       {/* Mobile Menu */}
       <AnimatePresence>
         {isMobileMenuOpen && (
-          <motion.div
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: 'auto' }}
-            exit={{ opacity: 0, height: 0 }}
-            className="fixed top-20 left-0 right-0 z-40 bg-background/95 backdrop-blur-md border-b border-border md:hidden"
+          <motion.div initial={{ opacity: 0, height: 0, y: -20 }}
+            animate={{ opacity: 1, height: 'auto', y: 0 }} exit={{ opacity: 0, height: 0, y: -20 }}
+            transition={{ duration: 0.3, ease: 'easeInOut' }}
+            className="fixed top-20 left-0 right-0 z-50 bg-white/95 backdrop-blur-lg border-b border-gray-200/50 md:hidden pointer-events-auto shadow-lg"
           >
             <div className="container-custom py-6">
-              <nav className="space-y-4">
-                {navItems.map((item, index) => (
-                  <motion.button
-                    key={item.name}
+              <nav className="space-y-2">
+                {navItems.map((item, idx) => (
+                  <motion.button key={item.name}
                     initial={{ opacity: 0, x: -20 }}
                     animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: index * 0.1 }}
-                    onClick={() => scrollToSection(item.href)}
+                    transition={{ delay: idx * 0.1 }}
+                    onClick={() => scrollTo(item.href)}
                     className={cn(
-                      'block w-full text-left px-4 py-3 text-lg font-medium transition-colors hover:text-primary hover:bg-accent/50 rounded-lg',
-                      activeSection === item.href.replace('#', '')
-                        ? 'text-primary bg-accent/30'
-                        : 'text-muted-foreground'
+                      'block w-full text-left px-4 py-3 text-lg font-medium transition-all duration-300 hover:text-orange-600 hover:bg-gradient-to-r hover:from-orange-50 hover:to-red-50 rounded-lg',
+                      activeSection === item.href.replace('#','') ? 'text-orange-600 bg-gradient-to-r from-orange-50 to-red-50' : 'text-gray-700'
                     )}
+                    whileHover={{ x: 4 }} whileTap={{ scale: 0.98 }}
                   >
                     {item.name}
                   </motion.button>
