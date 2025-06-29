@@ -10,6 +10,7 @@ const config: Config = {
   theme: {
     extend: {
       fontFamily: {
+        baskerville: ['"Libre Baskerville"', 'serif'],
         heading: ['var(--font-inter)', 'Inter', 'sans-serif'],
         body: ['var(--font-ibm-plex-sans)', 'IBM Plex Sans', 'sans-serif'],
       },

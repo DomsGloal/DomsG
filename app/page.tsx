@@ -7,15 +7,19 @@ import { AboutSection } from '@/components/sections/about-section';
 import { ContactSection } from '@/components/sections/contact-section';
 import { Footer } from '@/components/layout/footer';
 import { ScrollProgress } from '@/components/ui/scroll-progress';
-import { CustomCursor } from '@/components/ui/custom-cursor';
+import FindYourSolution from '@/components/sections/FindYourSolution';
+
+
 
 export default function HomePage() {
+
   return (
     <main className="min-h-screen bg-background">
-      <CustomCursor />
+    
       <ScrollProgress />
       <Navigation />
       <HeroSection />
+      <FindYourSolution />
       <ServicesSection />
       <AboutSection />
       <ContactSection />

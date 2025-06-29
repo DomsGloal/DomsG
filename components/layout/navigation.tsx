@@ -10,13 +10,16 @@ import Image from 'next/image';
 import DomsLogo from '../../lib/DOMS-logo1.png';
 
 const navItems = [
-  { name: 'Home', href: '#hero' },
-  { name: 'Services', href: '#services' },
+  // { name: 'Home', href: '#hero' },
+  { name: 'Capabilities', href: '#services' },
   { name: 'About', href: '#about' },
   { name: 'Contact', href: '#contact' },
   { name: 'Industries', href: '#industries' },
   { name: 'Insights', href: '#insights' },
 ];
+
+
+
 
 export function Navigation() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -26,15 +29,17 @@ export function Navigation() {
   const [mounted, setMounted] = useState(false);
   const { theme, setTheme, resolvedTheme } = useTheme();
 
+
   // Ensure component is mounted before accessing theme
   useEffect(() => {
     setMounted(true);
   }, []);
+  
 
   useEffect(() => {
     const onScroll = () => setIsScrolled(window.scrollY > 20);
     const onSection = () => {
-      const sections = ['hero','services','about','contact','industries','insights'];
+      const sections = ['services','about','contact','industries','insights'];
       const cur = sections.find(sec => {
         const el = document.getElementById(sec);
         if (!el) return false;
@@ -91,7 +96,6 @@ export function Navigation() {
     hover: { scale: 1.05, color: '#6b7280', transition: { duration: 0.2 } }
   };
 
-  // Don't render until mounted to avoid hydration mismatch
   if (!mounted) return null;
 
   const isDark = resolvedTheme === 'dark';
@@ -103,9 +107,6 @@ export function Navigation() {
         animate={{ y: 0 }}
         className={cn(
           'fixed top-0 left-0 right-0 z-[9999] transition-all duration-500',
-          isScrolled
-            ? 'bg-white/95 dark:bg-gray-900/95 backdrop-blur-lg shadow-lg border-b border-gray-200/50 dark:border-gray-700/50'
-            : 'bg-white/90 dark:bg-gray-900/90 backdrop-blur-sm'
         )}
       >
         <nav className="container-custom h-20 flex items-center justify-between">
@@ -136,29 +137,32 @@ export function Navigation() {
               />
             </motion.div>
             <div className="flex flex-col">
-              <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.3, duration: 0.6 }} className="flex items-center relative">
-                {/* Animated 'DOMS' letters */}
-                {['D','O','M','S'].map((l, i) => (
-                  <motion.span key={i} custom={i} variants={letterVariants} initial="initial"
-                    animate="animate" whileHover="hover"
-                    className="text-xl md:text-2xl font-bold font-heading text-gray-900 dark:text-white cursor-pointer inline-block"
-                    style={{ display: 'inline-block', transformOrigin: 'center bottom', transformStyle: 'preserve-3d' }}
-                  >
-                    {l}
-                  </motion.span>
-                ))}
+  <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }}
+    transition={{ delay: 0.3, duration: 0.6 }} className="flex items-center relative">
+    
+    {/* Animated 'DOMS' letters */}
+    {['D','O','M','S'].map((l, i) => (
+      <motion.span key={i} custom={i} variants={letterVariants} initial="initial"
+        animate="animate" whileHover="hover"
+        className="text-2xl md:text-3xl font-bold text-gray-900 dark:text-white cursor-pointer inline-block font-baskerville"
+      >
+        {l}
+      </motion.span>
+    ))}
 
-                <motion.span variants={globalVariants} initial="initial" animate="animate" whileHover="hover"
-                  className="ml-2 text-xl md:text-2xl font-bold font-heading text-gray-900 dark:text-white cursor-pointer relative">
-                  GLOBAL
-                </motion.span>
-              </motion.div>
-              <motion.span variants={taglineVariants} initial="initial" animate="animate" whileHover="hover"
-                className="text-xs text-gray-800/90 dark:text-gray-200/90 hidden sm:block leading-none mt-1 font-medium tracking-wide">
-                Holistic Revenue Generating Company
-              </motion.span>
-            </div>
+    <motion.span variants={globalVariants} initial="initial" animate="animate" whileHover="hover"
+      className="ml-2 text-2xl md:text-3xl font-bold text-gray-900 dark:text-white cursor-pointer relative font-baskerville"
+    >
+      GLOBAL
+    </motion.span>
+  </motion.div>
+
+  <motion.span variants={taglineVariants} initial="initial" animate="animate" whileHover="hover"
+    className="text-xs text-gray-800/90 dark:text-gray-200/90 hidden sm:block leading-none mt-1 font-medium tracking-wide ">
+    Holistic Revenue Generating Company
+  </motion.span>
+</div>
+
           </motion.button>
 
           {/* Desktop Links */}
@@ -191,14 +195,14 @@ export function Navigation() {
             {/* Enhanced Theme Toggle */}
             <motion.button
               onClick={toggleTheme}
-              className="relative w-16 h-8 rounded-full cursor-pointer border-2 border-gray-300 dark:border-gray-600 bg-gradient-to-r from-blue-100 to-yellow-100 dark:from-gray-700 dark:to-gray-800 overflow-hidden shadow-inner"
+              className="relative w-16 h-8 rounded-full cursor-pointer border-2 border-gray-300 dark:border-gray-600 bg-gradient-to-r from-blue-100 to-yellow-100 dark:from-gray-700 dark:to-gray-900 overflow-hidden shadow-inner"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               aria-label={`Switch to ${isDark ? 'light' : 'dark'} mode`}
             >
               {/* Background gradient animation */}
               <motion.div
-                className="absolute inset-0 bg-gradient-to-r from-yellow-200 via-orange-200 to-red-200 dark:from-indigo-900 dark:via-purple-900 dark:to-blue-900"
+                className="absolute inset-0 bg-gradient-to-r from-yellow-300 via-orange-500 to-red-400 dark:from-gray-900 dark:via-slate-900 dark:to-black-900"
                 animate={{
                   opacity: isDark ? 0.8 : 0.6,
                 }}
@@ -213,7 +217,7 @@ export function Navigation() {
                 transition={{ duration: 0.6 }}
                 className={cn(
                   "absolute inset-0 rounded-full pointer-events-none",
-                  isDark ? "bg-slate-100/20" : "bg-yellow-300/30"
+                  isDark ? "bg-slate-100/20" : "bg-yellow-300/90"
                 )}
               />
 
@@ -309,7 +313,11 @@ export function Navigation() {
             </div>
           </motion.div>
         )}
+      
       </AnimatePresence>
+
+      
+     
     </>
   );
 }

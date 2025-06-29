@@ -57,7 +57,7 @@ export default function RootLayout({
       <body className={`${inter.variable} ${ibmPlexSans.variable} font-body antialiased`}>
         <ThemeProvider
           attribute="class"
-          defaultTheme="light"
+          // defaultTheme="light"
           enableSystem
           disableTransitionOnChange={false}
         >
