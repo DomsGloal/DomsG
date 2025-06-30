@@ -5,7 +5,6 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronDown } from 'lucide-react';
 import { useTheme } from 'next-themes';
 import Image from 'next/image';
-import DropdownMenu from '../layout/menu';
 import DomsLogo from '../../lib/DOMS-logo1.png';
 
 export const HeroSection = () => {
@@ -27,16 +26,45 @@ export const HeroSection = () => {
       servicesSection.scrollIntoView({ behavior: 'smooth' });
     }
   };
+  if (!isMounted) return null;
+
+    const letterVariants = {
+      initial: { opacity: 0, y: 20, rotateX: -90, scale: 0.8 },
+      animate: (i: number) => ({
+        opacity: 1, y: 0, rotateX: 0, scale: 1,
+        transition: { delay: 0.5 + i * 0.15, duration: 0.8, type: 'spring', stiffness: 200, damping: 12 }
+      }),
+      hover: {
+        y: -8, scale: 1.2, color: '#fd4f00',
+        textShadow: '0 0 20px rgba(253,79,0,0.5)',
+        transition: { duration: 0.3, type: 'spring', stiffness: 400, damping: 10 }
+      }
+    };
+  
+    const globalVariants = {
+      initial: { opacity: 0, x: -20, scale: 0.9 },
+      animate: { opacity: 1, x: 0, scale: 1, transition: { delay: 1.2, duration: 0.8, type: 'spring', stiffness: 150, damping: 12 } },
+      hover: { scale: 1.1, color: '#fd4f00', textShadow: '0 0 15px rgba(253,79,0,0.3)', transition: { duration: 0.3, type: 'spring', stiffness: 300 } }
+    };
+  
+    const taglineVariants = {
+      initial: { opacity: 0, scale: 0.8, y: 10 },
+      animate: { opacity: 1, scale: 1, y: 0, transition: { delay: 1.8, duration: 0.6, ease: 'easeOut' } },
+      hover: { scale: 1.05, color: '#6b7280', transition: { duration: 0.2 } }
+    };
 
   const activeTheme = isMounted ? resolvedTheme : 'light';
 
   return (
     <>
-      <DropdownMenu />
+     
       <section
         id="hero"
         className="relative min-h-screen flex items-center justify-center px-6 sm:px-10 md:px-20 text-center bg-background text-foreground overflow-hidden transition-all duration-500"
       >
+
+         
+        {/* Intro Animation */}
         <AnimatePresence>
           {showInitialAnimation && (
             <motion.div
@@ -46,6 +74,7 @@ export const HeroSection = () => {
               transition={{ duration: 1.5, ease: [0.22, 1, 0.36, 1] }}
               className="fixed inset-0 flex items-center justify-center z-50 bg-black/50 backdrop-blur-md"
             >
+            
               <motion.div
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
@@ -71,8 +100,8 @@ export const HeroSection = () => {
           )}
         </AnimatePresence>
 
+        {/* Background Decorations */}
         <div className="absolute inset-0 bg-radial-gradient z-0 transition-all duration-500" />
-
         <div className="absolute inset-0 flex items-center justify-center z-0 opacity-10 pointer-events-none">
           <Image
             src={DomsLogo}
@@ -83,6 +112,7 @@ export const HeroSection = () => {
           />
         </div>
 
+        {/* Floating Particles */}
         <div className="absolute inset-0 pointer-events-none z-0">
           {[...Array(12)].map((_, i) => (
             <motion.div
@@ -113,7 +143,8 @@ export const HeroSection = () => {
           ))}
         </div>
 
-        <div className="relative z-10 max-w-4xl w-full mt-20">
+        {/* Hero Content */}
+        <div className="relative z-10 max-w-4xl w-full">
           <motion.div
             initial="hidden"
             animate="visible"
@@ -126,6 +157,34 @@ export const HeroSection = () => {
               },
             }}
           >
+            
+  {/* Brand Text */}
+  <div className="flex flex-col items-center text-center w-full">
+  {/* Main Title */}
+  <motion.h1
+    initial={{ opacity: 0, y: 20 }}
+    animate={{ opacity: 1, y: 0 }}
+    transition={{ delay: 0.3, duration: 0.8 }}
+    className="text-[clamp(4.5rem,8vw,6rem)]  leading-none text-black font-light font-butler  tracking-tight font-ultralight "
+    style={{fontSize: "120px"}}
+  >
+    DOMS GLOBAL
+  </motion.h1>
+
+  {/* Tagline */}
+  <motion.span
+    initial={{ opacity: 0, y: 10 }}
+    animate={{ opacity: 1, y: 0 }}
+    transition={{ delay: 0.6, duration: 0.8 }}
+    className="text-xs sm:text-sm mt-2 text-black font-semibold tracking-wide mb-8"
+  >
+    Holistic Revenue Generating Company
+  </motion.span>
+</div>
+
+
+
+
             <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold leading-tight mb-6">
               <span className="block text-transparent bg-clip-text bg-gradient-to-r from-primary via-primary to-secondary drop-shadow-[0_2px_4px_rgba(255,145,0,0.6)]">
                 Transforming Today&apos;s Ideas into Tomorrow&apos;s Impact.
@@ -136,18 +195,21 @@ export const HeroSection = () => {
               We partner with visionary organizations to create innovative solutions.
             </p>
 
-            <div className="flex flex-col sm:flex-row justify-center items-center gap-4 mb-16">
+            <div className="flex flex-col sm:flex-row gap-4 justify-center mb-10">
               <motion.button
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.98 }}
-                className="bg-primary hover:bg-primary/90 text-white px-6 py-3 text-lg font-medium rounded-xl shadow-md hover:shadow-primary/50 transition-all"
+                className="bg-primary hover:bg-primary/90 text-white px-6 py-3 text-lg font-medium rounded-xl shadow-md hover:shadow-primary/50 transition-all 
+                           dark:bg-primary/80 dark:hover:bg-primary/70 dark:text-black dark:shadow-primary/30"
               >
                 Explore Our Services
               </motion.button>
+
               <motion.button
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.98 }}
-                className="bg-muted hover:bg-muted/80 text-foreground border border-border px-6 py-3 text-lg font-medium rounded-xl backdrop-blur-md transition-all"
+                className="bg-muted text-foreground hover:bg-muted/80 border border-border px-6 py-3 text-lg font-medium rounded-xl backdrop-blur-md transition-all
+                           dark:bg-muted/80 dark:hover:bg-muted/60 dark:text-white dark:border-muted-foreground/30"
               >
                 Watch Our Story
               </motion.button>

@@ -13,7 +13,11 @@ const config: Config = {
         baskerville: ['"Libre Baskerville"', 'serif'],
         heading: ['var(--font-inter)', 'Inter', 'sans-serif'],
         body: ['var(--font-ibm-plex-sans)', 'IBM Plex Sans', 'sans-serif'],
+        butler: ['ButlerUltraLight', 'serif'],
       },
+      fontWeight: {
+      ultralight: '100',
+    },
       colors: {
         border: 'hsl(var(--border))',
         input: 'hsl(var(--input))',

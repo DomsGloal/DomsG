@@ -80,6 +80,14 @@
   --ring: 33 100% 85%;
 }
 
+@font-face {
+  font-family: 'ButlerUltraLight';
+  src: url('/fonts/Butler-UltraLight.otf') format('opentype');
+  font-weight: 150;
+  font-style: normal;
+  font-display: swap;
+}
+
 @layer base {
   * {
     @apply border-border;
