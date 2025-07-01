@@ -66,9 +66,6 @@ export const HeroSection = () => {
              transition-all duration-500
              mt-[-60px] sm:mt-0"
 >
-
-
-
          
         {/* Intro Animation */}
         <AnimatePresence>
@@ -174,7 +171,7 @@ export const HeroSection = () => {
     initial={{ opacity: 0, y: 20 }}
     animate={{ opacity: 1, y: 0 }}
     transition={{ delay: 0.3, duration: 0.8 }}
-   className="font-bodoni font-light leading-tight tracking-tight text-orange-600 text-[clamp(2.5rem,10vw,5rem)] sm:text-[clamp(4rem,9vw,10rem)] md:text-[clamp(5rem,10vw,14rem)] whitespace-nowrap text-center"
+   className="font-bodoni mt-8 font-light leading-tight tracking-tight text-orange-600 text-[clamp(2.5rem,10vw,5rem)] sm:text-[clamp(4rem,9vw,10rem)]  md:text-[clamp(5rem,10vw,14rem)] whitespace-nowrap text-center"
  >
  
     DOMS GLOBAL
@@ -194,7 +191,7 @@ export const HeroSection = () => {
 </div>
 
 
-<h1 className="text-3xl sm:text-4xl mt-9 md:text-5xl font-bold leading-snug tracking-tight mb-6 text-center">
+<h1 className="text-3xl sm:text-4xl mt-4 md:text-5xl font-bold leading-snug tracking-tight mb-6 text-center">
   <span className="block text-transparent bg-clip-text bg-gradient-to-r from-slate-500 to-slate-500 drop-shadow-[0_2px_4px_rgba(100,116,139,0.3)]">
     Transforming Today&apos;s Ideas into Tomorrow&apos;s Impact.
   </span>
