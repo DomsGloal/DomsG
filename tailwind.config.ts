@@ -9,12 +9,16 @@ const config: Config = {
   ],
   theme: {
     extend: {
-      fontFamily: {
-        baskerville: ['"Libre Baskerville"', 'serif'],
-        heading: ['var(--font-inter)', 'Inter', 'sans-serif'],
-        body: ['var(--font-ibm-plex-sans)', 'IBM Plex Sans', 'sans-serif'],
-        butler: ['ButlerUltraLight', 'serif'],
-      },
+     fontFamily: {
+  inter: ['var(--font-inter)', 'Inter', 'sans-serif'],
+  ibm: ['var(--font-ibm-plex-sans)', 'IBM Plex Sans', 'sans-serif'],
+  poppins: ['var(--font-poppins)', 'Poppins', 'sans-serif'],
+  bodoni: ['var(--font-bodoni)', 'Bodoni Moda', 'serif'],
+  heading: ['var(--font-inter)', 'sans-serif'],
+  body: ['var(--font-ibm-plex-sans)', 'sans-serif'],
+}
+
+,
       fontWeight: {
       ultralight: '100',
     },

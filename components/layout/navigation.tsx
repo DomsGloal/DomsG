@@ -82,14 +82,15 @@ className="flex items-center justify-center flex-1"
               className="relative"
             >
               <Image
-                src={DomsLogo}
-                alt="DOMS Global Logo"
-                style={{position:'relative',top:'-12px'}}
-                width={120}
-                height={120}
-                className="h-26 w-26 object-contain transition-all duration-300 "
-                priority
-              />
+  src={DomsLogo}
+  alt="DOMS Global Logo"
+  width={120}
+  height={120}
+  priority // fixes Largest Contentful Paint warning
+  style={{ height: 'auto' }} // maintain aspect ratio
+  className="w-[120px] object-contain mb-6 transition-all duration-300"
+/>
+
               <motion.div
                 className="absolute inset-0 rounded-full border-2 border-orange-500/0 pointer-events-none"
                 animate={
@@ -110,15 +111,42 @@ className="flex items-center justify-center flex-1"
           </motion.button>
 
           {/* Right: Actions */}
-          <div className="flex-1 flex justify-end items-center  gap-4 sm:gap-5 " >
-            <motion.button
+<div
+  className="flex-1 flex justify-end items-center gap-4 sm:gap-5 relative
+             sm:-right-8 md:-right-10 lg:-right-[220px]"
+>
+
+
+            <Button
+   
+     className={cn(
+    'relative overflow-hidden group',
+    'bg-gradient-to-r from-orange-500 to-red-500 hover:from-orange-600 hover:to-red-600',
+    'text-white font-semibold shadow-lg hover:shadow-xl',
+    'transition-all duration-300 transform hover:scale-105',
+    'border-0 rounded-full',
+    // Responsive sizing:
+    'px-3 py-1.5 text-xs',              // Mobile
+    'sm:px-4 sm:py-2 sm:text-sm',       // Tablets
+    'md:px-5 md:py-2.5 md:text-base',   // Desktop
+  )}
+              
+              onClick={scrollToContact}
+            >
+              <span className="relative z-10" >Let&apos;s Connect</span>
+            </Button>
+
+                <motion.button
               onClick={toggleTheme}
-          
+    
               className={cn(
-                
-                'relative w-12 h-6 sm:w-16 sm:h-8 rounded-full cursor-pointer',
+                 'relative w-10 h-5',                  // Mobile
+    'sm:w-12 sm:h-6',                     // Tablets
+    'md:w-16 md:h-8', 
+                'rounded-full cursor-pointer',
                 
                 'border-2 border-gray-300 dark:border-gray-600',
+              
                 'bg-gradient-to-r from-blue-100 to-yellow-100 dark:from-gray-700 dark:to-gray-900',
                 'overflow-hidden shadow-inner transition-all duration-300',
                 'hover:scale-105 focus:outline-none focus:ring-2 focus:ring-orange-500/50'
@@ -137,7 +165,7 @@ className="flex items-center justify-center flex-1"
                   duration: 0.3
                   
                 }}
-                className="absolute top-0.5  sm:top-1 h-5 w-5 sm:h-6 sm:w-6 rounded-full bg-white dark:bg-gray-100 shadow-lg flex items-center justify-center border border-gray-200 dark:border-gray-300"
+                className="absolute top-0.5   sm:top-1 h-5 w-5 sm:h-6 sm:w-6 rounded-full bg-white dark:bg-gray-100 shadow-lg flex items-center justify-center border border-gray-200 dark:border-gray-300"
               >
                 {isDark ? (
                   <Moon className="h-3 w-3 text-indigo-600" />
@@ -146,21 +174,6 @@ className="flex items-center justify-center flex-1"
                 )}
               </motion.div>
             </motion.button>
-
-            <Button
-              className={cn(
-                'relative overflow-hidden group ',
-                'bg-gradient-to-r from-orange-500 to-red-500 hover:from-orange-600 hover:to-red-600',
-                'text-white font-semibold shadow-lg hover:shadow-xl',
-                'transition-all duration-300 transform hover:scale-105',
-                'text-xs sm:text-sm px-3 sm:px-4 py-2 sm:py-2.5 ',
-                'border-0 rounded-full'
-              )}
-              
-              onClick={scrollToContact}
-            >
-              <span className="relative z-10" >Let&apos;s Connect</span>
-            </Button>
           </div>
         </nav>
       </motion.header>

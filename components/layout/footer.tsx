@@ -5,6 +5,7 @@ import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import { Mail, Phone, MapPin, Linkedin, Twitter, Github, ArrowUp } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import Logo from '../../lib/Doms-logo.png'
 
 const footerLinks = {
   company: [
@@ -86,10 +87,12 @@ export function Footer() {
             {/* Company Info */}
             <motion.div variants={itemVariants} className="lg:col-span-1">
               <div className="flex items-center space-x-3 mb-6">
-                <div className="w-10 h-10 bg-gradient-to-br from-primary to-secondary rounded-lg flex items-center justify-center">
-                  <span className="text-white font-bold text-xl font-heading">D</span>
+                <div className="w-10 h-10  rounded-lg flex items-center justify-center">
+                  {/* <span className="text-white font-bold text-xl font-heading">D</span> */}
+           
+
                 </div>
-                <span className="text-2xl font-bold font-heading text-foreground">
+                <span className="text-2xl  font-bold font-heading text-foreground">
                   DOMS Global
                 </span>
               </div>
@@ -110,7 +113,7 @@ export function Footer() {
                 </div>
                 <div className="flex items-center space-x-3 text-sm text-muted-foreground">
                   <MapPin className="w-4 h-4 text-primary" />
-                  <span>New York, NY</span>
+                  <span>Gachibowli, Hyderabad</span>
                 </div>
               </div>
             </motion.div>

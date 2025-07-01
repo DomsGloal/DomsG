@@ -13,19 +13,19 @@ const contactInfo = [
   {
     icon: Mail,
     title: 'Email Us',
-    details: 'hello@domsglobal.com',
+    details: 'domsgloballlp@gmail.com',
     subDetails: 'We respond within 24 hours',
   },
   {
     icon: Phone,
     title: 'Call Us',
-    details: '+1 (555) 123-4567',
-    subDetails: 'Mon-Fri 9AM-6PM EST',
+    details: '+91 7032222707',
+    subDetails: 'Mon-Fri 10AM-6PM EST',
   },
   {
     icon: MapPin,
     title: 'Visit Us',
-    details: 'New York, NY',
+    details: 'Gachibowli, Hyderabad',
     subDetails: 'Schedule an appointment',
   },
   {

@@ -1,9 +1,10 @@
 import './globals.css';
 import type { Metadata } from 'next';
-import { Inter, IBM_Plex_Sans } from 'next/font/google';
+import { Inter, IBM_Plex_Sans, Poppins, Bodoni_Moda } from 'next/font/google';
 import { ThemeProvider } from '@/components/providers/theme-provider';
 import { Toaster } from '@/components/ui/sonner';
 
+// Load Google Fonts using next/font/google
 const inter = Inter({ 
   subsets: ['latin'],
   variable: '--font-inter',
@@ -14,6 +15,20 @@ const ibmPlexSans = IBM_Plex_Sans({
   subsets: ['latin'],
   weight: ['400', '500', '600'],
   variable: '--font-ibm-plex-sans',
+  display: 'swap',
+});
+
+const poppins = Poppins({
+  subsets: ['latin'],
+  weight: ['300', '400', '500', '600', '700'],
+  variable: '--font-poppins',
+  display: 'swap',
+});
+
+const bodoni = Bodoni_Moda({
+  subsets: ['latin'],
+  weight: ['400', '500'],
+  variable: '--font-bodoni',
   display: 'swap',
 });
 
@@ -53,8 +68,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" suppressHydrationWarning>
-      <body className={`${inter.variable} ${ibmPlexSans.variable} font-body antialiased`}>
+    <html
+      lang="en"
+      suppressHydrationWarning
+      className={`${inter.variable} ${ibmPlexSans.variable} ${poppins.variable} ${bodoni.variable}`}
+    >
+      <body className="font-body antialiased">
         <ThemeProvider
           attribute="class"
           defaultTheme="light"

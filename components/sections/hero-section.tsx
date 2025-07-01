@@ -58,10 +58,16 @@ export const HeroSection = () => {
   return (
     <>
      
-      <section
-        id="hero"
-        className="relative min-h-screen flex items-center justify-center px-6 sm:px-10 md:px-20 text-center bg-background text-foreground overflow-hidden transition-all duration-500"
-      >
+     <section
+  id="hero"
+  className="relative min-h-screen flex items-center justify-center 
+             px-6 sm:px-10 md:px-20 
+             text-center bg-background text-foreground overflow-hidden 
+             transition-all duration-500
+             mt-[-60px] sm:mt-0"
+>
+
+
 
          
         {/* Intro Animation */}
@@ -72,10 +78,11 @@ export const HeroSection = () => {
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.5, opacity: 0 }}
               transition={{ duration: 1.5, ease: [0.22, 1, 0.36, 1] }}
-              className="fixed inset-0 flex items-center justify-center z-50 bg-black/50 backdrop-blur-md"
+              className="fixed inset-0 flex items-center justify-center z-50 bg-black/50 "
             >
             
               <motion.div
+                
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ delay: 0.5, duration: 1 }}
@@ -88,6 +95,7 @@ export const HeroSection = () => {
                   className="object-contain"
                 />
                 <motion.h1
+
                   initial={{ y: 20, opacity: 0 }}
                   animate={{ y: 0, opacity: 1 }}
                   transition={{ delay: 0.8, duration: 0.8 }}
@@ -103,13 +111,13 @@ export const HeroSection = () => {
         {/* Background Decorations */}
         <div className="absolute inset-0 bg-radial-gradient z-0 transition-all duration-500" />
         <div className="absolute inset-0 flex items-center justify-center z-0 opacity-10 pointer-events-none">
-          <Image
+          {/* <Image
             src={DomsLogo}
             alt="DOMS Logo"
             width={600}
             height={600}
             className="object-contain"
-          />
+          /> */}
         </div>
 
         {/* Floating Particles */}
@@ -134,11 +142,12 @@ export const HeroSection = () => {
                 repeatType: 'reverse',
                 ease: 'linear',
               }}
-              className="absolute rounded-full blur-xl bg-gradient-to-br from-primary/20 to-secondary/20 transition-all duration-500"
+              className="absolute rounded-full   from-primary/20 to-secondary/20 transition-all duration-500"
               style={{
                 width: `${Math.random() * 150 + 80}px`,
                 height: `${Math.random() * 150 + 80}px`,
               }}
+              // BUBBLES-BG ;= bg-gradient-to-br
             />
           ))}
         </div>
@@ -159,37 +168,41 @@ export const HeroSection = () => {
           >
             
   {/* Brand Text */}
-  <div className="flex flex-col items-center text-center w-full">
+  <div className="flex flex-col items-center text-center  w-full">
   {/* Main Title */}
   <motion.h1
     initial={{ opacity: 0, y: 20 }}
     animate={{ opacity: 1, y: 0 }}
     transition={{ delay: 0.3, duration: 0.8 }}
-    className="text-[clamp(4.5rem,8vw,6rem)]  leading-none text-black font-light font-butler  tracking-tight font-ultralight "
-    style={{fontSize: "120px"}}
-  >
+   className="font-bodoni font-light leading-tight tracking-tight text-orange-600 text-[clamp(2.5rem,10vw,5rem)] sm:text-[clamp(4rem,9vw,10rem)] md:text-[clamp(5rem,10vw,14rem)] whitespace-nowrap text-center"
+ >
+ 
     DOMS GLOBAL
   </motion.h1>
 
-  {/* Tagline */}
-  <motion.span
-    initial={{ opacity: 0, y: 10 }}
-    animate={{ opacity: 1, y: 0 }}
-    transition={{ delay: 0.6, duration: 0.8 }}
-    className="text-xs sm:text-sm mt-2 text-black font-semibold tracking-wide mb-8"
-  >
-    Holistic Revenue Generating Company
-  </motion.span>
+ {/* Tagline */}
+<motion.span
+  initial={{ opacity: 0, y: 10 }}
+  animate={{ opacity: 1, y: 0 }}
+  transition={{ delay: 0.6, duration: 0.8 }}
+  className="text-lg sm:text-xl text-black dark:text-gray-200 font-semibold tracking-wide leading-relaxed mb-10 text-center block"
+>
+  Holistic Revenue Generating Company
+</motion.span>
+
+
 </div>
 
 
+<h1 className="text-3xl sm:text-4xl mt-9 md:text-5xl font-bold leading-snug tracking-tight mb-6 text-center">
+  <span className="block text-transparent bg-clip-text bg-gradient-to-r from-slate-500 to-slate-500 drop-shadow-[0_2px_4px_rgba(100,116,139,0.3)]">
+    Transforming Today&apos;s Ideas into Tomorrow&apos;s Impact.
+  </span>
+</h1>
 
 
-            <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold leading-tight mb-6">
-              <span className="block text-transparent bg-clip-text bg-gradient-to-r from-primary via-primary to-secondary drop-shadow-[0_2px_4px_rgba(255,145,0,0.6)]">
-                Transforming Today&apos;s Ideas into Tomorrow&apos;s Impact.
-              </span>
-            </h1>
+
+            {/* drop-shadow-[0_2px_4px_rgba(255,145,0,0.6)] */}
 
             <p className="text-base sm:text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto mb-10 transition-colors duration-500">
               We partner with visionary organizations to create innovative solutions.
@@ -208,7 +221,7 @@ export const HeroSection = () => {
               <motion.button
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.98 }}
-                className="bg-muted text-foreground hover:bg-muted/80 border border-border px-6 py-3 text-lg font-medium rounded-xl backdrop-blur-md transition-all
+                className="bg-muted text-foreground hover:bg-muted/80 border border-border px-6 py-3 text-lg font-medium rounded-xl  transition-all
                            dark:bg-muted/80 dark:hover:bg-muted/60 dark:text-white dark:border-muted-foreground/30"
               >
                 Watch Our Story
