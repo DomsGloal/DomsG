@@ -2,7 +2,6 @@
 
 import React, { useState, useRef, useEffect } from 'react';
 import { Menu, X, ChevronRight, ChevronDown } from 'lucide-react';
-import { motion, AnimatePresence } from 'framer-motion';
 
 interface Category {
   name: string;
@@ -197,13 +196,21 @@ const DropdownMenu: React.FC = () => {
       }
     };
 
+    // Prevent body scroll when mobile menu is open
+    if (menuOpen && isMobile) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'unset';
+    }
+
     document.addEventListener('mousedown', handleClickOutside);
     document.addEventListener('keydown', handleEscape);
     return () => {
       document.removeEventListener('mousedown', handleClickOutside);
       document.removeEventListener('keydown', handleEscape);
+      document.body.style.overflow = 'unset';
     };
-  }, []);
+  }, [menuOpen, isMobile]);
 
   // Desktop hover handlers
   const handleDesktopHover = (item: Category, level: number) => {
@@ -225,21 +232,16 @@ const DropdownMenu: React.FC = () => {
   return (
     <>
       {/* Backdrop for mobile */}
-      <AnimatePresence>
-        {menuOpen && isMobile && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="fixed inset-0 bg-black/50 z-[9998] md:hidden"
-            onClick={closeMenus}
-          />
-        )}
-      </AnimatePresence>
+      {menuOpen && isMobile && (
+        <div
+          className="fixed inset-0 bg-black/50 z-[9998] md:hidden"
+          onClick={closeMenus}
+        />
+      )}
 
       <div className="relative z-50">
         {/* Menu Button */}
-        <div className={`fixed ${isMobile ? 'top-4 left-4' : 'top-8 left-8'} z-[9999]`}>
+        <div className="fixed top-4 left-4 md:top-8 md:left-8 z-[9999]">
           <button
             onClick={() => setMenuOpen(prev => !prev)}
             className={`flex items-center gap-2 px-4 py-2.5 bg-white dark:bg-gray-900 border border-gray-300 dark:border-gray-700 rounded-lg text-sm font-medium text-gray-800 dark:text-gray-100 shadow-lg hover:shadow-xl transition-all duration-200 hover:scale-105 ${
@@ -247,36 +249,29 @@ const DropdownMenu: React.FC = () => {
             }`}
             aria-label={menuOpen ? 'Close menu' : 'Open menu'}
           >
-            <motion.div
-              animate={{ rotate: menuOpen ? 180 : 0 }}
-              transition={{ duration: 0.2 }}
-            >
+            <div className={`transform transition-transform duration-200 ${menuOpen ? 'rotate-180' : ''}`}>
               {menuOpen ? <X size={18} /> : <Menu size={18} />}
-            </motion.div>
+            </div>
             <span className="hidden sm:inline">Menu</span>
           </button>
         </div>
 
         {/* Dropdown Menu */}
-        <AnimatePresence>
-          {menuOpen && (
-            <motion.div
-              initial={{ opacity: 0, y: -20, scale: 0.95 }}
-              animate={{ opacity: 1, y: 0, scale: 1 }}
-              exit={{ opacity: 0, y: -20, scale: 0.95 }}
-              transition={{ duration: 0.2, ease: "easeOut" }}
-              className={`fixed z-[9999]   ${
-                isMobile 
-                  ? 'top-20 left-4 right-4 max-h-[80vh]' 
-                  : 'top-24 left-8 w-[95vw] max-w-[1200px] max-h-[85vh]'
-              }`}
-              ref={containerRef}
-              onMouseLeave={handleMouseLeave}
-              onMouseEnter={cancelClose}
-            >
-              {isMobile ? (
-                // Mobile Layout - Accordion Style
-                <div className="overflow-y-auto max-h-[80vh]">
+        {menuOpen && (
+          <div
+            className={`fixed z-[9999] ${
+              isMobile 
+                ? 'top-20 left-4 right-4 bottom-4' 
+                : 'top-24 left-8 w-[95vw] max-w-[1200px] max-h-[85vh]'
+            }`}
+            ref={containerRef}
+            onMouseLeave={handleMouseLeave}
+            onMouseEnter={cancelClose}
+          >
+            {isMobile ? (
+              // Mobile Layout - Accordion Style
+              <div className="bg-white dark:bg-gray-900 rounded-lg shadow-xl border border-gray-200 dark:border-gray-700 flex flex-col h-full">
+                <div className="flex-1 overflow-y-auto">
                   {menuData.map((item, idx) => (
                     <div key={idx} className="border-b border-gray-100 dark:border-gray-700 last:border-b-0">
                       <button
@@ -287,200 +282,176 @@ const DropdownMenu: React.FC = () => {
                         {item.subcategories && (
                           <ChevronDown 
                             size={16} 
-                            className={`transform transition-transform ${
+                            className={`transform transition-transform duration-200 ${
                               mobileActiveLevel1?.name === item.name ? 'rotate-180' : ''
                             }`}
                           />
                         )}
                       </button>
                       
-                      <AnimatePresence>
-                        {mobileActiveLevel1?.name === item.name && item.subcategories && (
-                          <motion.div
-                            initial={{ height: 0, opacity: 0 }}
-                            animate={{ height: 'auto', opacity: 1 }}
-                            exit={{ height: 0, opacity: 0 }}
-                            transition={{ duration: 0.2 }}
-                            className="overflow-hidden bg-gray-50 dark:bg-gray-800"
-                          >
-                            {item.subcategories.map((sub, i) => (
-                              <div key={i}>
-                                <button
-                                  onClick={() => handleMobileToggle(sub, 2)}
-                                  className="w-full flex items-center justify-between px-6 py-3 text-left hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
-                                >
-                                  <span className="text-sm text-gray-700 dark:text-gray-300">{sub.name}</span>
-                                  {sub.subcategories && (
-                                    <ChevronRight 
-                                      size={14} 
-                                      className={`transform transition-transform ${
-                                        mobileActiveLevel2?.name === sub.name ? 'rotate-90' : ''
-                                      }`}
-                                    />
-                                  )}
-                                </button>
-                                
-                                <AnimatePresence>
-                                  {mobileActiveLevel2?.name === sub.name && sub.subcategories && (
-                                    <motion.div
-                                      initial={{ height: 0, opacity: 0 }}
-                                      animate={{ height: 'auto', opacity: 1 }}
-                                      exit={{ height: 0, opacity: 0 }}
-                                      transition={{ duration: 0.2 }}
-                                      className="overflow-hidden bg-gray-100 dark:bg-gray-700"
-                                    >
-                                      {sub.subcategories.map((tertiary, j) => (
-                                        <div key={j}>
-                                          <button
-                                            onClick={() => handleMobileToggle(tertiary, 3)}
-                                            className="w-full flex items-center justify-between px-8 py-2.5 text-left hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors"
-                                          >
-                                            <span className="text-sm text-gray-600 dark:text-gray-400">{tertiary.name}</span>
-                                            {tertiary.details && (
-                                              <ChevronRight 
-                                                size={12} 
-                                                className={`transform transition-transform ${
-                                                  mobileActiveLevel3?.name === tertiary.name ? 'rotate-90' : ''
-                                                }`}
-                                              />
-                                            )}
-                                          </button>
-                                          
-                                          <AnimatePresence>
-                                            {mobileActiveLevel3?.name === tertiary.name && tertiary.details && (
-                                              <motion.div
-                                                initial={{ height: 0, opacity: 0 }}
-                                                animate={{ height: 'auto', opacity: 1 }}
-                                                exit={{ height: 0, opacity: 0 }}
-                                                transition={{ duration: 0.2 }}
-                                                className="overflow-hidden bg-gray-200 dark:bg-gray-600 px-10 py-3"
-                                              >
-                                                <ul className="space-y-1">
-                                                  {tertiary.details.map((detail, k) => (
-                                                    <li key={k} className="text-xs text-gray-600 dark:text-gray-400 flex items-start">
-                                                      <span className="w-1 h-1 bg-orange-400 rounded-full mt-2 mr-2 flex-shrink-0"></span>
-                                                      {detail}
-                                                    </li>
-                                                  ))}
-                                                </ul>
-                                              </motion.div>
-                                            )}
-                                          </AnimatePresence>
+                      {mobileActiveLevel1?.name === item.name && item.subcategories && (
+                        <div className="bg-gray-50 dark:bg-gray-800">
+                          {item.subcategories.map((sub, i) => (
+                            <div key={i}>
+                              <button
+                                onClick={() => handleMobileToggle(sub, 2)}
+                                className="w-full flex items-center justify-between px-6 py-3 text-left hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
+                              >
+                                <span className="text-sm text-gray-700 dark:text-gray-300">{sub.name}</span>
+                                {sub.subcategories && (
+                                  <ChevronRight 
+                                    size={14} 
+                                    className={`transform transition-transform duration-200 ${
+                                      mobileActiveLevel2?.name === sub.name ? 'rotate-90' : ''
+                                    }`}
+                                  />
+                                )}
+                              </button>
+                              
+                              {mobileActiveLevel2?.name === sub.name && sub.subcategories && (
+                                <div className="bg-gray-100 dark:bg-gray-700">
+                                  {sub.subcategories.map((tertiary, j) => (
+                                    <div key={j}>
+                                      <button
+                                        onClick={() => handleMobileToggle(tertiary, 3)}
+                                        className="w-full flex items-center justify-between px-8 py-2.5 text-left hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors"
+                                      >
+                                        <span className="text-sm text-gray-600 dark:text-gray-400">{tertiary.name}</span>
+                                        {tertiary.details && (
+                                          <ChevronRight 
+                                            size={12} 
+                                            className={`transform transition-transform duration-200 ${
+                                              mobileActiveLevel3?.name === tertiary.name ? 'rotate-90' : ''
+                                            }`}
+                                          />
+                                        )}
+                                      </button>
+                                      
+                                      {mobileActiveLevel3?.name === tertiary.name && tertiary.details && (
+                                        <div className="bg-gray-200 dark:bg-gray-600 px-10 py-3">
+                                          <ul className="space-y-2">
+                                            {tertiary.details.map((detail, k) => (
+                                              <li key={k} className="text-xs text-gray-600 dark:text-gray-400 flex items-start">
+                                                <span className="w-1 h-1 bg-orange-400 rounded-full mt-2 mr-2 flex-shrink-0"></span>
+                                                {detail}
+                                              </li>
+                                            ))}
+                                          </ul>
                                         </div>
-                                      ))}
-                                    </motion.div>
-                                  )}
-                                </AnimatePresence>
-                              </div>
-                            ))}
-                          </motion.div>
-                        )}
-                      </AnimatePresence>
+                                      )}
+                                    </div>
+                                  ))}
+                                </div>
+                              )}
+                            </div>
+                          ))}
+                        </div>
+                      )}
                     </div>
                   ))}
                 </div>
-              ) : (
-                // Desktop Layout - Dynamic Column Grid
-                <div className="flex h-full min-h-[350px] max-h-[80vh]">
-                  {/* Level 1 */}
-                  <div className="flex-shrink-0 w-64 border-r border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900 overflow-y-auto transition-all duration-300">
-                    <div className="p-2">
-                      <h3 className="text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wide px-3 py-2">Main Categories</h3>
-                      {menuData.map((item, idx) => (
+              </div>
+            ) : (
+              // Desktop Layout - Dynamic Column Grid
+              <div className="bg-white dark:bg-gray-900 rounded-lg shadow-xl border border-gray-200 dark:border-gray-700 flex h-full min-h-[350px] max-h-[80vh] overflow-hidden">
+                {/* Level 1 */}
+                <div className="flex-shrink-0 w-64 border-r border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900 overflow-y-auto">
+                  <div className="p-2">
+                    <h3 className="text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wide px-3 py-2">Main Categories</h3>
+                    {menuData.map((item, idx) => (
+                      <div
+                        key={idx}
+                        onMouseEnter={() => handleDesktopHover(item, 1)}
+                        className={`mx-1 mb-1 px-3 py-3 text-sm font-medium cursor-pointer rounded-lg transition-all duration-200 ${
+                          hovered?.name === item.name 
+                            ? 'bg-orange-100 text-orange-800 shadow-sm transform scale-[1.02]' 
+                            : 'hover:bg-gray-50 dark:hover:bg-gray-700 text-gray-700 dark:text-gray-300 hover:shadow-sm'
+                        }`}
+                      >
+                        <div className="flex items-center justify-between">
+                          {item.name}
+                          {item.subcategories && <ChevronRight size={14} className="opacity-60" />}
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Level 2 */}
+                {hovered?.subcategories?.length && (
+                  <div className="flex-shrink-0 w-64 border-r border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900 overflow-y-auto">
+                    <div className="p-4">
+                      <h3 className="text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wide mb-3">
+                        {hovered.name}
+                      </h3>
+                      {hovered.subcategories.map((sub, i) => (
                         <div
-                          key={idx}
-                          onMouseEnter={() => handleDesktopHover(item, 1)}
-                          className={`mx-1 mb-1 px-3 py-3 text-sm font-medium cursor-pointer rounded-lg transition-all duration-200 ${
-                            hovered?.name === item.name 
-                              ? 'bg-orange-100 text-orange-800 shadow-sm transform scale-[1.02]' 
-                              : 'hover:bg-white dark:hover:bg-gray-700 text-gray-700 dark:text-gray-300 hover:shadow-sm'
+                          key={i}
+                          onMouseEnter={() => handleDesktopHover(sub, 2)}
+                          className={`mb-2 px-3 py-2.5 text-sm cursor-pointer rounded-md transition-all duration-150 ${
+                            subHovered?.name === sub.name 
+                              ? 'bg-orange-50 text-orange-700 border-l-2 border-orange-400' 
+                              : 'hover:bg-gray-50 dark:hover:bg-gray-800 text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200'
                           }`}
                         >
                           <div className="flex items-center justify-between">
-                            {item.name}
-                            {item.subcategories && <ChevronRight size={14} className="opacity-60" />}
+                            {sub.name}
+                            {sub.subcategories && <ChevronRight size={12} className="opacity-60" />}
                           </div>
                         </div>
                       ))}
                     </div>
                   </div>
+                )}
 
-                  {/* Level 2 */}
-                  {hovered?.subcategories?.length && (
-                    <div className="flex-shrink-0 w-64 border-r border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900 overflow-y-auto transition-all duration-300">
-                      <div className="p-4">
-                        <h3 className="text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wide mb-3">
-                          {hovered.name}
-                        </h3>
-                        {hovered.subcategories.map((sub, i) => (
-                          <div
-                            key={i}
-                            onMouseEnter={() => handleDesktopHover(sub, 2)}
-                            className={`mb-2 px-3 py-2.5 text-sm cursor-pointer rounded-md transition-all duration-150 ${
-                              subHovered?.name === sub.name 
-                                ? 'bg-orange-50 text-orange-700 border-l-2 border-orange-400' 
-                                : 'hover:bg-gray-50 dark:hover:bg-gray-800 text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200'
+                {/* Level 3 */}
+                {subHovered?.subcategories?.length && (
+                  <div className="flex-shrink-0 w-64 border-r border-gray-200 dark:border-gray-700 bg-gradient-to-b from-gray-50 to-gray-100 dark:from-gray-800 dark:to-gray-900 overflow-y-auto">
+                    <div className="p-4">
+                      <h3 className="text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wide mb-3">
+                        {subHovered.name}
+                      </h3>
+                      <ul className="space-y-1">
+                        {subHovered.subcategories.map((item, j) => (
+                          <li
+                            key={j}
+                            onMouseEnter={() => handleDesktopHover(item, 3)}
+                            className={`px-3 py-2 text-sm cursor-pointer rounded-md transition-all duration-150 ${
+                              tertiaryHovered?.name === item.name 
+                                ? 'bg-orange-100 text-orange-700 shadow-sm' 
+                                : 'hover:bg-white dark:hover:bg-gray-700 text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200'
                             }`}
                           >
-                            <div className="flex items-center justify-between">
-                              {sub.name}
-                              {sub.subcategories && <ChevronRight size={12} className="opacity-60" />}
-                            </div>
-                          </div>
+                            {item.name}
+                          </li>
                         ))}
-                      </div>
+                      </ul>
                     </div>
-                  )}
+                  </div>
+                )}
 
-                  {/* Level 3 */}
-                  {subHovered?.subcategories?.length && (
-                    <div className="flex-shrink-0 w-64 border-r border-gray-200 dark:border-gray-700 bg-gradient-to-b from-gray-50 to-gray-100 dark:from-gray-800 dark:to-gray-900 overflow-y-auto transition-all duration-300">
-                      <div className="p-4">
-                        <h3 className="text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wide mb-3">
-                          {subHovered.name}
-                        </h3>
-                        <ul className="space-y-1">
-                          {subHovered.subcategories.map((item, j) => (
-                            <li
-                              key={j}
-                              onMouseEnter={() => handleDesktopHover(item, 3)}
-                              className={`px-3 py-2 text-sm cursor-pointer rounded-md transition-all duration-150 ${
-                                tertiaryHovered?.name === item.name 
-                                  ? 'bg-orange-100 text-orange-700 shadow-sm' 
-                                  : 'hover:bg-white dark:hover:bg-gray-700 text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200'
-                              }`}
-                            >
-                              {item.name}
-                            </li>
-                          ))}
-                        </ul>
-                      </div>
+                {/* Level 4 */}
+                {tertiaryHovered?.details && (
+                  <div className="flex-shrink-0 w-64 bg-white dark:bg-gray-900 overflow-y-auto">
+                    <div className="p-4">
+                      <h3 className="text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wide mb-3">
+                        {tertiaryHovered.name} Details
+                      </h3>
+                      <ul className="space-y-3">
+                        {tertiaryHovered.details.map((point, i) => (
+                          <li key={i} className="flex items-start">
+                            <span className="w-2 h-2 bg-orange-400 rounded-full mt-2 mr-3 flex-shrink-0"></span>
+                            <span className="text-sm text-gray-600 dark:text-gray-300 leading-relaxed">{point}</span>
+                          </li>
+                        ))}
+                      </ul>
                     </div>
-                  )}
-
-                  {/* Level 4 */}
-                  {tertiaryHovered?.details && (
-                    <div className="flex-shrink-0 w-64 bg-white dark:bg-gray-900 overflow-y-auto transition-all duration-300">
-                      <div className="p-4">
-                        <h3 className="text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wide mb-3">
-                          {tertiaryHovered.name} Details
-                        </h3>
-                        <ul className="space-y-3">
-                          {tertiaryHovered.details.map((point, i) => (
-                            <li key={i} className="flex items-start">
-                              <span className="w-2 h-2 bg-orange-400 rounded-full mt-2 mr-3 flex-shrink-0"></span>
-                              <span className="text-sm text-gray-600 dark:text-gray-300 leading-relaxed">{point}</span>
-                            </li>
-                          ))}
-                        </ul>
-                      </div>
-                    </div>
-                  )}
-                </div>
-              )}
-            </motion.div>
-          )}
-        </AnimatePresence>
+                  </div>
+                )}
+              </div>
+            )}
+          </div>
+        )}
       </div>
     </>
   );
