@@ -64,7 +64,7 @@ export const HeroSection = () => {
              px-6 sm:px-10 md:px-20 
              text-center bg-background text-foreground overflow-hidden 
              transition-all duration-500
-             mt-[-60px] sm:mt-0"
+             mt-[40px] sm:mt-0"
 >
          
         {/* Intro Animation */}
@@ -165,7 +165,7 @@ export const HeroSection = () => {
           >
             
   {/* Brand Text */}
-  <div className="flex flex-col items-center text-center  w-full">
+  <div className="flex flex-col items-center  text-center  w-full">
   {/* Main Title */}
   <motion.h1
     initial={{ opacity: 0, y: 20 }}

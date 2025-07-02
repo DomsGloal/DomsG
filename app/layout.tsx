@@ -4,6 +4,7 @@ import { Inter, IBM_Plex_Sans, Poppins, Bodoni_Moda } from 'next/font/google';
 import { ThemeProvider } from '@/components/providers/theme-provider';
 import { Toaster } from '@/components/ui/sonner';
 
+
 // Load Google Fonts using next/font/google
 const inter = Inter({ 
   subsets: ['latin'],
@@ -35,6 +36,9 @@ const bodoni = Bodoni_Moda({
 export const metadata: Metadata = {
   title: 'DOMS Global - Transforming Ideas into Impact',
   description: 'DOMS Global is a leading innovation company transforming today\'s ideas into tomorrow\'s impact through cutting-edge solutions and professional excellence.',
+   icons: {
+    icon: './lib/DOMS-logo1.png',
+  },
   keywords: 'innovation, technology, consulting, digital transformation, business solutions',
   authors: [{ name: 'DOMS Global' }],
   creator: 'DOMS Global',

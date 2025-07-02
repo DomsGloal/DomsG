@@ -383,7 +383,7 @@ const DropdownMenu: React.FC = () => {
                 // Desktop Layout - Dynamic Column Grid
                 <div className="flex h-full min-h-[350px] max-h-[80vh]">
                   {/* Level 1 */}
-                  <div className="flex-shrink-0 w-64 border-r border-gray-200 dark:border-gray-700 bg-gradient-to-b from-gray-50 to-gray-100 dark:from-gray-800 dark:to-gray-900 overflow-y-auto transition-all duration-300">
+                  <div className="flex-shrink-0 w-64 border-r border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900 overflow-y-auto transition-all duration-300">
                     <div className="p-2">
                       <h3 className="text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wide px-3 py-2">Main Categories</h3>
                       {menuData.map((item, idx) => (
