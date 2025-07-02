@@ -96,7 +96,7 @@ export const HeroSection = () => {
                   initial={{ y: 20, opacity: 0 }}
                   animate={{ y: 0, opacity: 1 }}
                   transition={{ delay: 0.8, duration: 0.8 }}
-                  className="text-3xl font-bold mt-4 text-white"
+                  className="text-3xl font-bodoni font-light  tracking-tight mt-4 text-white"
                 >
                   DOMS GLOBAL
                 </motion.h1>
@@ -167,7 +167,7 @@ export const HeroSection = () => {
   {/* Brand Text */}
   <div className="flex flex-col items-center  text-center  w-full">
   {/* Main Title */}
-  <motion.h1
+  {/* <motion.h1
     initial={{ opacity: 0, y: 20 }}
     animate={{ opacity: 1, y: 0 }}
     transition={{ delay: 0.3, duration: 0.8 }}
@@ -175,24 +175,24 @@ export const HeroSection = () => {
  >
  
     DOMS GLOBAL
-  </motion.h1>
+  </motion.h1> */}
 
  {/* Tagline */}
-<motion.span
+{/* <motion.span
   initial={{ opacity: 0, y: 10 }}
   animate={{ opacity: 1, y: 0 }}
   transition={{ delay: 0.6, duration: 0.8 }}
   className="text-lg sm:text-xl text-black dark:text-gray-200 font-semibold tracking-wide leading-relaxed mb-10 text-center block"
 >
   Holistic Revenue Generating Company
-</motion.span>
+</motion.span> */}
 
 
 </div>
 
 
 <h1 className="text-3xl sm:text-4xl mt-4 md:text-5xl font-bold leading-snug tracking-tight mb-6 text-center">
-  <span className="block text-transparent bg-clip-text bg-gradient-to-r from-slate-500 to-slate-500 drop-shadow-[0_2px_4px_rgba(100,116,139,0.3)]">
+  <span className="block text-transparent bg-clip-text bg-gradient-to-r from-primary via-primary to-secondary drop-shadow-[0_2px_4px_rgba(255,145,0,0.6)]">
     Transforming Today&apos;s Ideas into Tomorrow&apos;s Impact.
   </span>
 </h1>
@@ -201,7 +201,7 @@ export const HeroSection = () => {
 
             {/* drop-shadow-[0_2px_4px_rgba(255,145,0,0.6)] */}
 
-            <p className="text-base sm:text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto mb-10 transition-colors duration-500">
+            <p className="text-base sm:text-lg md:text-xl max-w-2xl mx-auto mb-10  duration-500">
               We partner with visionary organizations to create innovative solutions.
             </p>
 

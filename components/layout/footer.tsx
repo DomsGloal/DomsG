@@ -5,7 +5,8 @@ import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import { Mail, Phone, MapPin, Linkedin, Twitter, Github, ArrowUp } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import Logo from '../../lib/Doms-logo.png'
+import Image from 'next/image';
+import DomsLogo from '../../lib/DOMS-logo1.png';
 
 const footerLinks = {
   company: [
@@ -83,16 +84,15 @@ export function Footer() {
           animate={inView ? "visible" : "hidden"}
           className="py-16"
         >
-          <div className="grid grid-cols-1 lg:grid-cols-4 gap-12">
+          <div className="grid ">
             {/* Company Info */}
             <motion.div variants={itemVariants} className="lg:col-span-1">
               <div className="flex items-center space-x-3 mb-6">
                 <div className="w-10 h-10  rounded-lg flex items-center justify-center">
                   {/* <span className="text-white font-bold text-xl font-heading">D</span> */}
-           
-
+                 <Image src={DomsLogo} alt="DOMS Global Logo" width={80} height={80} priority />
                 </div>
-                <span className="text-2xl  font-bold font-heading text-foreground">
+                <span className="text-2xl  font-bodoni font-light  tracking-tight  text-foreground">
                   DOMS Global
                 </span>
               </div>
@@ -105,11 +105,11 @@ export function Footer() {
               <div className="space-y-3">
                 <div className="flex items-center space-x-3 text-sm text-muted-foreground">
                   <Mail className="w-4 h-4 text-primary" />
-                  <span>hello@domsglobal.com</span>
+                  <span>sales@domsglobal.co</span>
                 </div>
                 <div className="flex items-center space-x-3 text-sm text-muted-foreground">
                   <Phone className="w-4 h-4 text-primary" />
-                  <span>+1 (555) 123-4567</span>
+                  <span>+91 7032222707</span>
                 </div>
                 <div className="flex items-center space-x-3 text-sm text-muted-foreground">
                   <MapPin className="w-4 h-4 text-primary" />
@@ -119,7 +119,7 @@ export function Footer() {
             </motion.div>
 
             {/* Links Sections */}
-            <motion.div variants={itemVariants} className="lg:col-span-3">
+            {/* <motion.div variants={itemVariants} className="lg:col-span-3">
               <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
                 {Object.entries(footerLinks).map(([category, links]) => (
                   <div key={category}>
@@ -141,7 +141,7 @@ export function Footer() {
                   </div>
                 ))}
               </div>
-            </motion.div>
+            </motion.div> */}
           </div>
         </motion.div>
 
@@ -182,7 +182,7 @@ export function Footer() {
                 className="ml-4 group"
               >
                 Back to Top
-                <ArrowUp className="ml-2 w-4 h-4 group-hover:-translate-y-1 transition-transform" />
+                <ArrowUp className="ml-2 bg-white w-4 h-4 group-hover:-translate-y-1 transition-transform" />
               </Button>
             </div>
           </div>

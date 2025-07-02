@@ -13,7 +13,7 @@ const contactInfo = [
   {
     icon: Mail,
     title: 'Email Us',
-    details: 'domsgloballlp@gmail.com',
+    details: 'sales@domsglobal.co',
     subDetails: 'We respond within 24 hours',
   },
   {

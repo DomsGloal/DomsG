@@ -1,11 +1,24 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { categories } from '@/lib/categories';
+
+
+ 
 
 const FindYourSolution: React.FC = () => {
   const [selectedCategory, setSelectedCategory] = useState<string>(categories[0].name);
   const [selectedSubcategory, setSelectedSubcategory] = useState<string>(categories[0].subcategories[0]);
+  const [mounted, setMounted] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
+
+
+   useEffect(() => {
+    setMounted(true);
+    const handleScroll = () => setIsScrolled(window.scrollY > 20);
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   const handleCategoryChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const newCategory = e.target.value;
@@ -21,8 +34,10 @@ const FindYourSolution: React.FC = () => {
     setSelectedSubcategory(e.target.value);
   };
 
+    if (!mounted) return null;
+
   return (
-    <section className="max-w-4xl mx-auto p-6 sm:p-8 bg-white dark:bg-[#0d0d0d] rounded-2xl shadow-lg mt-16 transition-colors duration-300">
+    <section className="max-w-6xl mx-auto p-6 sm:p-8 bg-white dark:bg-[#0d0d0d] rounded-2xl shadow-xl mt-16 transition-colors duration-300">
       <h2 className="text-3xl sm:text-4xl font-bold text-center text-gray-900 dark:text-white mb-2">
         Find Your Perfect Solution
       </h2>

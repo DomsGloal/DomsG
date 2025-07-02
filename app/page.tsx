@@ -7,7 +7,7 @@ import { AboutSection } from '@/components/sections/about-section';
 import { ContactSection } from '@/components/sections/contact-section';
 import { Footer } from '@/components/layout/footer';
 import { ScrollProgress } from '@/components/ui/scroll-progress';
-import FindYourSolution from '@/components/sections/FindYourSolution';
+// import FindYourSolution from '@/components/sections/FindYourSolution';
 
 
 
@@ -19,7 +19,7 @@ export default function HomePage() {
       <ScrollProgress />
       <Navigation />
       <HeroSection />
-      <FindYourSolution />
+      {/* <FindYourSolution /> */}
       <ServicesSection />
       <AboutSection />
       <ContactSection />

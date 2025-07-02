@@ -353,7 +353,7 @@ const DropdownMenu: React.FC = () => {
               </div>
             ) : (
               // Desktop Layout - Dynamic Column Grid
-              <div className="bg-white dark:bg-gray-900 rounded-lg shadow-xl border border-gray-200 dark:border-gray-700 flex h-full min-h-[350px] max-h-[80vh] overflow-hidden">
+              <div className="bg-white dark:bg-gray-900 rounded-lg dark:border-gray-700 flex h-full min-h-[350px] max-h-[80vh] overflow-hidden">
                 {/* Level 1 */}
                 <div className="flex-shrink-0 w-64 border-r border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900 overflow-y-auto">
                   <div className="p-2">
