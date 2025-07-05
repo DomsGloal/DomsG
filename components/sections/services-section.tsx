@@ -264,14 +264,14 @@ function ServiceCard({
             </motion.div>
           ))}
         </div>
-{/* 
+
         <Button
           variant="ghost"
           className="w-full justify-between group-hover:bg-primary/10 group-hover:text-primary transition-all duration-300"
         >
           Learn More
           <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-        </Button> */}
+        </Button>
       </CardContent>
     </Card>
   );

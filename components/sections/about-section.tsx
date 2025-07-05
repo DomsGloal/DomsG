@@ -87,7 +87,7 @@ export function AboutSection() {
   };
 
   return (
-    <section id="about" className="py-24 bg-background" ref={ref}>
+    <section id="about" className="py-24  bg-muted/30" ref={ref}>
       <div className="container-custom">
         <motion.div
           variants={containerVariants}

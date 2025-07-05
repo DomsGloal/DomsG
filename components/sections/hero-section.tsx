@@ -64,7 +64,7 @@ export const HeroSection = () => {
              px-6 sm:px-10 md:px-20 
              text-center bg-background text-foreground overflow-hidden 
              transition-all duration-500
-             mt-[40px] sm:mt-0"
+             mt-[40px] sm:mt-0  bg-muted/30"
 >
          
         {/* Intro Animation */}

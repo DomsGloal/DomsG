@@ -37,7 +37,7 @@ export function Navigation() {
   useEffect(() => {
     const onScroll = () => setIsScrolled(window.scrollY > 20);
     const onSection = () => {
-      const sections = ['services','industries','about','contact'];
+      const sections = ['services','about','contact','industries'];
       const cur = sections.find(sec => {
         const el = document.getElementById(sec);
         if (!el) return false;
@@ -108,8 +108,8 @@ export function Navigation() {
         className={cn(
           'fixed top-0 left-0 right-0 z-[9999] transition-all duration-500',
           isScrolled
-            ? 'bg-white/95 dark:bg-gray-900/95 backdrop-blur-lg shadow-lg border-b border-gray-200/50 dark:border-gray-700/50'
-            : 'bg-white/90 dark:bg-gray-900/90 backdrop-blur-sm'
+            ? 'bg-white/95 dark: bg-muted/30 backdrop-blur-lg shadow-lg border-b border-gray-200/50 dark:border-gray-700/50'
+            : 'bg-white/90 dark: bg-muted/30 backdrop-blur-sm'
         )}
       >
         <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
