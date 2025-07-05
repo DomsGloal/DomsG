@@ -6,7 +6,7 @@ import { ArrowRight } from 'lucide-react';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
 import infrastructureBackground from "../../lib/industriesImages/InfraBG.jpg";
-import infrastructureForeground from "../../lib/industriesImages/infraIMG.jpg";
+import infrastructureForeground from "../../lib/industriesImages/InfraIMG.jpg";
 
 // Animation variants
 const container = {

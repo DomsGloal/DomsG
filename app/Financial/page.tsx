@@ -5,8 +5,8 @@ import { Button } from '@/components/ui/button';
 import { ArrowRight } from 'lucide-react';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
-import FinancialIMG from '../../lib/industriesImages/financialIMG.jpg';
-import FinancialBG from '../../lib/industriesImages/financialBG.jpg';
+import FinancialIMG from '../../lib/industriesImages/FinancialIMG.jpg';
+import FinancialBG from '../../lib/industriesImages/FinancialBG.jpg';
 
 // Animation variants
 const container = {
