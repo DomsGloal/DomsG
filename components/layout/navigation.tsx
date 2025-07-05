@@ -15,7 +15,6 @@ const navItems = [
   { name: 'About', href: '#about' },
   { name: 'Contact', href: '#contact' },
   { name: 'Industries', href: '#industries' },
-  { name: 'Insights', href: '#insights' },
 ];
 
 export function Navigation() {
@@ -37,7 +36,7 @@ export function Navigation() {
   useEffect(() => {
     const onScroll = () => setIsScrolled(window.scrollY > 20);
     const onSection = () => {
-      const sections = ['services','about','contact','industries','insights'];
+      const sections = ['services','about','contact','industries'];
       const cur = sections.find(sec => {
         const el = document.getElementById(sec);
         if (!el) return false;

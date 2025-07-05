@@ -35,9 +35,10 @@ const bodoni = Bodoni_Moda({
 
 export const metadata: Metadata = {
   title: 'DOMS Global - Transforming Ideas into Impact',
-  description: 'DOMS Global is a leading innovation company transforming today\'s ideas into tomorrow\'s impact through cutting-edge solutions and professional excellence.',
-   icons: {
-    icon: './lib/DOMS-logo1.png',
+  description:
+    "DOMS Global is a leading innovation company transforming today's ideas into tomorrow's impact through cutting-edge solutions and professional excellence.",
+  icons: {
+    icon: "/fevicon.png",
   },
   keywords: 'innovation, technology, consulting, digital transformation, business solutions',
   authors: [{ name: 'DOMS Global' }],
@@ -49,13 +50,15 @@ export const metadata: Metadata = {
     locale: 'en_US',
     url: 'https://domsglobal.com',
     title: 'DOMS Global - Transforming Ideas into Impact',
-    description: 'Leading innovation company transforming today\'s ideas into tomorrow\'s impact through cutting-edge solutions.',
+    description:
+      "Leading innovation company transforming today's ideas into tomorrow's impact through cutting-edge solutions.",
     siteName: 'DOMS Global',
   },
   twitter: {
     card: 'summary_large_image',
     title: 'DOMS Global - Transforming Ideas into Impact',
-    description: 'Leading innovation company transforming today\'s ideas into tomorrow\'s impact.',
+    description:
+      "Leading innovation company transforming today's ideas into tomorrow's impact.",
     creator: '@domsglobal',
   },
   verification: {
@@ -65,6 +68,7 @@ export const metadata: Metadata = {
     canonical: 'https://domsglobal.com',
   },
 };
+
 
 export default function RootLayout({
   children,
@@ -77,6 +81,10 @@ export default function RootLayout({
       suppressHydrationWarning
       className={`${inter.variable} ${ibmPlexSans.variable} ${poppins.variable} ${bodoni.variable}`}
     >
+      <head>
+        <link rel="icon" href="/fevicon.png" />
+        {/* Add any additional head elements here */}
+      </head>
       <body className="font-body antialiased">
         <ThemeProvider
           attribute="class"

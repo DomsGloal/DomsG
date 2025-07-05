@@ -7,6 +7,8 @@ import { AboutSection } from '@/components/sections/about-section';
 import { ContactSection } from '@/components/sections/contact-section';
 import { Footer } from '@/components/layout/footer';
 import { ScrollProgress } from '@/components/ui/scroll-progress';
+import { IndustriesSection } from '@/components/sections/industriescards';
+// import {AgriculturePage} from '@/Pages/AgriculturePage';
 // import FindYourSolution from '@/components/sections/FindYourSolution';
 
 
@@ -21,8 +23,11 @@ export default function HomePage() {
       <HeroSection />
       {/* <FindYourSolution /> */}
       <ServicesSection />
+      <IndustriesSection />
       <AboutSection />
       <ContactSection />
+      {/* <AgriculturePage /> */}
+
       <Footer />
     </main>
   );
