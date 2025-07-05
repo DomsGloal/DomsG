@@ -87,7 +87,7 @@ const iconVariants = {
 
 export function IndustriesSection() {
   return (
-    <div className="bg-white py-12 px-6 md:px-16">
+    <div className="bg-white py-12 px-6 md:px-16" id="industries">
       <h2 className="text-3xl md:text-4xl font-bold text-[#fd4f00] mb-10 text-center">
         Our Industries
       </h2>

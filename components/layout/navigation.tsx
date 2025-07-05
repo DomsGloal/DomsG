@@ -12,9 +12,10 @@ import DomsLogo from '../../lib/DOMS-logo1.png';
 const navItems = [
   { name: 'Home', href: '#hero' },
   { name: 'Services', href: '#services' },
+  { name: 'Industries', href: '#industries' },
   { name: 'About', href: '#about' },
   { name: 'Contact', href: '#contact' },
-  { name: 'Industries', href: '#industries' },
+
 ];
 
 export function Navigation() {
@@ -36,7 +37,7 @@ export function Navigation() {
   useEffect(() => {
     const onScroll = () => setIsScrolled(window.scrollY > 20);
     const onSection = () => {
-      const sections = ['services','about','contact','industries'];
+      const sections = ['services','industries','about','contact'];
       const cur = sections.find(sec => {
         const el = document.getElementById(sec);
         if (!el) return false;
