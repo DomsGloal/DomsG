@@ -169,7 +169,6 @@ export default function InfrastructurePage() {
               ].map((service, index) => (
                 <motion.div
                   key={index}
-                  variants={item}
                    whileHover={hoverCard.hover}
                   className="bg-white p-6 rounded-xl shadow-md border border-gray-100 hover:border-[#fd4f00] transition-colors"
                 >

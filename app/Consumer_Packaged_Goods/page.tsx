@@ -117,9 +117,7 @@ export default function ConsumerPackagedGoodsPage() {
               ].map((challenge, index) => (
                 <motion.div 
                   key={index}
-                  variants={item}
-                  whileHover="hover"
-                  variants={hoverCard}
+                   whileHover={hoverCard.hover}
                   className="bg-white p-6 rounded-lg shadow-md border border-gray-100"
                 >
                   <p className="text-lg">{challenge}</p>

@@ -233,26 +233,27 @@ export function Navigation() {
             {/* Action Buttons */}
             <div className="flex items-center space-x-2 sm:space-x-3">
               {/* Contact Button */}
-              <Button
+              <motion.button
                 onClick={scrollToContact}
                 className="hidden sm:inline-flex bg-gradient-to-r from-orange-500 to-red-500 hover:from-orange-600 hover:to-red-600 text-white font-semibold rounded-full px-4 py-2 text-sm transition-all duration-300 shadow-md hover:shadow-lg"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
+                type="button"
               >
                 Let&apos;s Connect
-              </Button>
+              </motion.button>
 
               {/* Mobile Contact Button */}
-              <Button
+              <motion.button
                 onClick={scrollToContact}
                 className="sm:hidden bg-gradient-to-r from-orange-500 to-red-500 hover:from-orange-600 hover:to-red-600 text-white rounded-full p-2 shadow-md"
-                size="icon"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
+                type="button"
               >
                 <MessageCircle className="w-4 h-4" />
                 <span className="sr-only">Contact</span>
-              </Button>
+              </motion.button>
 
               {/* Theme Toggle */}
               <motion.button

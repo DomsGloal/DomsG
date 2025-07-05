@@ -118,8 +118,7 @@ export default function TravelTourismPage() {
                 <motion.div 
                   key={index}
                   variants={item}
-                  whileHover="hover"
-                  variants={hoverCard}
+                  whileHover={hoverCard.hover}
                   className="bg-white p-6 rounded-lg shadow-md border border-gray-100"
                 >
                   <p className="text-lg">{challenge}</p>
@@ -171,8 +170,7 @@ export default function TravelTourismPage() {
                 <motion.div
                   key={index}
                   variants={item}
-                  whileHover="hover"
-                  variants={hoverCard}
+                   whileHover={hoverCard.hover}
                   className="bg-white p-6 rounded-xl shadow-md border border-gray-100 hover:border-[#fd4f00] transition-colors"
                 >
                   <h3 className="text-xl font-bold text-gray-900 mb-3">{service.title}</h3>
