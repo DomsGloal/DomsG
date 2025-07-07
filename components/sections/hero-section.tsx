@@ -189,7 +189,7 @@ export const HeroSection = () => {
 </div>
 
 
-<h1 className="text-3xl lg:mt-40 sm:text-4xl  md:text-5xl font-bold leading-snug tracking-tight mb-6 text-center mt-20">
+<h1 className="text-3xl lg:mt-40 sm:text-4xl  md:text-5xl font-bold leading-snug tracking-tight mb-6 text-center ">
   <span className="block text-transparent bg-clip-text bg-gradient-to-r from-primary via-primary to-secondary drop-shadow-[0_2px_4px_rgba(255,145,0,0.6)]">
     Transforming Today&apos;s Ideas into Tomorrow&apos;s Impact.
   </span>
