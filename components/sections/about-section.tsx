@@ -87,7 +87,7 @@ export function AboutSection() {
   };
 
   return (
-    <section id="about" className="py-24  bg-muted/30" ref={ref}>
+    <section id="about" className="py-20 bg-muted/30" ref={ref}>
       <div className="container-custom">
         <motion.div
           variants={containerVariants}
@@ -164,9 +164,9 @@ export function AboutSection() {
             <div className="grid grid-cols-2 gap-6">
               {[
                 { number: '15+', label: 'Years of Excellence' },
-                { number: '500+', label: 'Projects Completed' },
-                { number: '50+', label: 'Global Clients' },
-                { number: '98%', label: 'Success Rate' },
+                { number: '50+', label: 'Projects Completed' },
+                { number: '10+', label: 'Global Clients' },
+                { number: '100%', label: 'Success Rate' },
               ].map((stat, index) => (
                 <motion.div
                   key={index}

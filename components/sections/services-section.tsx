@@ -12,7 +12,8 @@ import {
   Banknote,
   Users,
   Rocket,
-  ArrowRight,
+  Globe,
+  Handshake,
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
@@ -34,8 +35,12 @@ const services = [
       'Business Model Innovation',
       'M&A Strategy',
       'Change Management',
+      'Strategic Roadmapping',
+      'Organizational Agility',
+      'Scenario Planning',
+      'Portfolio Optimization',
     ],
-    color: 'from-blue-600 to-purple-600',
+    color: 'from-red-600 to-orange-500',
   },
   {
     icon: Megaphone,
@@ -47,8 +52,12 @@ const services = [
       'Digital Marketing',
       'Customer Journey Mapping',
       'Campaign Analytics',
+      'Content Strategy',
+      'CRM Optimization',
+      'Segmentation & Targeting',
+      'Social Media Strategy',
     ],
-    color: 'from-pink-500 to-red-500',
+    color: 'from-red-600 to-orange-500',
   },
   {
     icon: Package,
@@ -60,8 +69,12 @@ const services = [
       'Lean & Six Sigma',
       'Procurement Strategy',
       'Logistics & Distribution',
+      'Inventory Management',
+      'Supplier Risk Management',
+      'Demand Forecasting',
+      'Quality Management',
     ],
-    color: 'from-green-600 to-emerald-500',
+    color: 'from-red-600 to-orange-500',
   },
   {
     icon: Cpu,
@@ -73,8 +86,12 @@ const services = [
       'Cloud Migration',
       'Data & Analytics',
       'Automation',
+      'Cybersecurity',
+      'Enterprise Architecture',
+      'Digital Product Development',
+      'AI & Machine Learning',
     ],
-    color: 'from-indigo-500 to-blue-500',
+    color: 'from-red-600 to-orange-500',
   },
   {
     icon: Banknote,
@@ -86,8 +103,12 @@ const services = [
       'Risk Management',
       'Regulatory Compliance',
       'Internal Audit',
+      'Cost Control',
+      'Capital Allocation',
+      'Treasury Operations',
+      'Fraud Prevention',
     ],
-    color: 'from-yellow-500 to-amber-500',
+    color: 'from-red-600 to-orange-500',
   },
   {
     icon: Users,
@@ -99,8 +120,12 @@ const services = [
       'Employee Engagement',
       'Org Design',
       'Performance Metrics',
+      'Workforce Planning',
+      'Diversity & Inclusion',
+      'Talent Acquisition',
+      'Culture Transformation',
     ],
-    color: 'from-purple-500 to-fuchsia-500',
+    color: 'from-red-600 to-orange-500',
   },
   {
     icon: Rocket,
@@ -112,10 +137,49 @@ const services = [
       'Product Innovation',
       'Pricing & Monetization',
       'Growth Hacking',
+      'Channel Strategy',
+      'Customer Acquisition',
+      'Innovation Labs',
+      'Venture Scaling',
     ],
-    color: 'from-teal-500 to-cyan-500',
+    color: 'from-red-600 to-orange-500',
+  },
+  {
+    icon: Globe,
+    title: 'Sustainability & ESG Advisory',
+    description:
+      'Sustainability strategies that align with ESG principles to drive long‑term impact, compliance, and brand trust.',
+    features: [
+      'Carbon Footprint Assessment',
+      'ESG Reporting & Compliance',
+      'Sustainable Supply Chains',
+      'Green Innovation',
+      'Impact Measurement',
+      'Renewable Transition',
+      'Circular Economy Models',
+      'Stakeholder Engagement',
+    ],
+    color: 'from-red-600 to-orange-500',
+  },
+  {
+    icon: Handshake,
+    title: 'Partnerships, Alliances & Ecosystem Strategy',
+    description:
+      'Build and manage strategic partnerships and ecosystems that unlock new value and market reach.',
+    features: [
+      'Partner Identification & Vetting',
+      'Alliance Management',
+      'Joint Go-to-Market Models',
+      'Ecosystem Mapping',
+      'Co-Innovation Strategy',
+      'Revenue Sharing Models',
+      'Contract Structuring',
+      'Partner Enablement Programs',
+    ],
+    color: 'from-red-600 to-orange-500',
   },
 ] as const;
+
 
 export function ServicesSection() {
   const [ref, inView] = useInView({
@@ -147,7 +211,7 @@ export function ServicesSection() {
   } as const;
 
   return (
-    <section id="services" className="py-24 bg-muted/30" ref={ref}>
+    <section id="services" className="py-6 bg-muted/30" ref={ref}>
       <div className="container-custom">
         {/* Section Heading */}
         <motion.div
@@ -235,7 +299,7 @@ function ServiceCard({
         </motion.div>
 
         {/* Title */}
-        <h3 className="text-2xl font-bold mb-4 font-heading group-hover:text-primary transition-colors">
+        <h3 className="text-2xl font-bodoni font-bold tracking-tight  mb-4 group-hover:text-primary transition-colors">
           {service.title}
         </h3>
 
@@ -265,13 +329,13 @@ function ServiceCard({
           ))}
         </div>
 
-        <Button
+        {/* <Button
           variant="ghost"
           className="w-full justify-between group-hover:bg-primary/10 group-hover:text-primary transition-all duration-300"
         >
           Learn More
           <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-        </Button>
+        </Button> */}
       </CardContent>
     </Card>
   );

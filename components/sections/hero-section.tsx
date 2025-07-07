@@ -58,9 +58,7 @@ export const HeroSection = () => {
   return (
     <>
      
-     <section
-  id="hero"
-  className="relative min-h-screen flex items-center justify-center 
+     <section id="hero" className="relative min-h-screen flex items-center justify-center 
              px-6 sm:px-10 md:px-20 
              text-center bg-background text-foreground overflow-hidden 
              transition-all duration-500
@@ -108,13 +106,13 @@ export const HeroSection = () => {
         {/* Background Decorations */}
         <div className="absolute inset-0 bg-radial-gradient z-0 transition-all duration-500" />
         <div className="absolute inset-0 flex items-center justify-center z-0 opacity-10 pointer-events-none">
-          {/* <Image
+          <Image
             src={DomsLogo}
             alt="DOMS Logo"
             width={600}
             height={600}
-            className="object-contain"
-          /> */}
+            className="object-contain mt-6 opacity-2"
+          />
         </div>
 
         {/* Floating Particles */}
@@ -191,7 +189,7 @@ export const HeroSection = () => {
 </div>
 
 
-<h1 className="text-3xl sm:text-4xl mt-4 md:text-5xl font-bold leading-snug tracking-tight mb-6 text-center">
+<h1 className="text-3xl lg:mt-40 sm:text-4xl  md:text-5xl font-bold leading-snug tracking-tight mb-6 text-center mt-20">
   <span className="block text-transparent bg-clip-text bg-gradient-to-r from-primary via-primary to-secondary drop-shadow-[0_2px_4px_rgba(255,145,0,0.6)]">
     Transforming Today&apos;s Ideas into Tomorrow&apos;s Impact.
   </span>
@@ -211,6 +209,7 @@ export const HeroSection = () => {
                 whileTap={{ scale: 0.98 }}
                 className="bg-primary hover:bg-primary/90 text-white px-6 py-3 text-lg font-medium rounded-xl shadow-md hover:shadow-primary/50 transition-all 
                            dark:bg-primary/80 dark:hover:bg-primary/70 dark:text-black dark:shadow-primary/30"
+                onClick={scrollToServices}
               >
                 Explore Our Services
               </motion.button>
@@ -228,7 +227,7 @@ export const HeroSection = () => {
             <motion.div
               animate={{ y: [0, 8, 0] }}
               transition={{ duration: 1.5, repeat: Infinity }}
-              className="flex flex-col items-center cursor-pointer text-primary"
+              className="flex flex-col  items-center cursor-pointer text-primary sm:mt-0"
               onClick={scrollToServices}
             >
               <span className="text-sm mb-2 opacity-70 text-primary transition-colors duration-500">
