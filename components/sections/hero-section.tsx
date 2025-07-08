@@ -106,13 +106,13 @@ export const HeroSection = () => {
         {/* Background Decorations */}
         <div className="absolute inset-0 bg-radial-gradient z-0 transition-all duration-500" />
         <div className="absolute inset-0 flex items-center justify-center z-0 opacity-10 pointer-events-none">
-          {/* <Image
+          <Image
             src={DomsLogo}
             alt="DOMS Logo"
             width={600}
             height={600}
             className="object-contain mt-6 opacity-2"
-          /> */}
+          />
         </div>
 
         {/* Floating Particles */}
@@ -148,7 +148,7 @@ export const HeroSection = () => {
         </div>
 
         {/* Hero Content */}
-        <div className="relative z-10 max-w-4xl w-full">
+        <div className="relative z-10 max-w-6xl w-full">
           <motion.div
             initial="hidden"
             animate="visible"
@@ -163,7 +163,7 @@ export const HeroSection = () => {
           >
             
   {/* Brand Text */}
-  <div className="flex flex-col items-center  text-center  w-full">
+  {/* <div className="flex flex-col items-center  text-center  w-full"> */}
   {/* Main Title */}
   {/* <motion.h1
     initial={{ opacity: 0, y: 20 }}
@@ -186,24 +186,58 @@ export const HeroSection = () => {
 </motion.span> */}
 
 
-</div>
+{/* </div> */}
 
+ <div className="px-4 overflow-hidden">
+    {/* Animated Headline */}
+    <motion.h1 
+      className="text-3xl m-4 mt-20 sm:text-4xl md:text-5xl font-bold leading-snug tracking-tight mb-6 text-center"
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.8, ease: "easeOut" }}
+    >
+      <motion.span
+        className="block text-transparent bg-clip-text bg-gradient-to-r from-primary via-primary to-secondary drop-shadow-[0_2px_4px_rgba(255,145,0,0.6)]"
+        initial={{ backgroundPosition: '0% 50%' }}
+        animate={{ backgroundPosition: '100% 50%' }}
+        transition={{
+          duration: 8,
+          repeat: Infinity,
+          repeatType: 'reverse',
+          ease: "linear"
+        }}
+      >
+       Global consulting powerhouse with deep industry expertise and over a decade of proven excellence
+      </motion.span>
+    </motion.h1>
 
-<h1 className=" mt-20 text-3xl sm:text-4xl  md:text-5xl font-bold leading-snug tracking-tight mb-6 text-center">
-  <span className="block text-transparent bg-clip-text bg-gradient-to-r from-primary via-primary to-secondary drop-shadow-[0_2px_4px_rgba(255,145,0,0.6)]">
-    Transforming Today&apos;s Ideas into Tomorrow&apos;s Impact.
-  </span>
-</h1>
+    {/* Animated Paragraph */}
+    <motion.p 
+      className="text-base sm:text-lg md:text-xl max-w-2xl mx-auto  mb-10 relative"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ delay: 0.3, duration: 0.6 }}
+    >
+      <motion.span
+        className="relative inline-block text-zinc-900 dark:text-white text-muted-foreground text-lg "
+        whileHover={{
+          scale: 1.02,
+          transition: { duration: 0.2 }
+        }}
+      >
+        We partner with visionary organizations to create innovative solutions.
+        <motion.span
+          className="absolute bottom-0 left-0 w-full h-0.5 bg-gradient-to-r from-primary/30 to-secondary/30"
+          initial={{ scaleX: 0 }}
+          whileInView={{ scaleX: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8, delay: 0.5 }}
+        />
+      </motion.span>
+    </motion.p>
+  </div>
 
-
-
-            {/* drop-shadow-[0_2px_4px_rgba(255,145,0,0.6)] */}
-
-            <p className="text-base sm:text-lg md:text-xl max-w-2xl mx-auto mb-10  duration-500">
-              We partner with visionary organizations to create innovative solutions.
-            </p>
-
-            <div className="flex flex-col sm:flex-row gap-4 justify-center mb-10">
+            {/* <div className="flex flex-col sm:flex-row gap-4 justify-center mb-10">
               <motion.button
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.98 }}
@@ -222,19 +256,19 @@ export const HeroSection = () => {
               >
                 Watch Our Story
               </motion.button>
-            </div>
+            </div> */}
 
-            <motion.div
-              animate={{ y: [0, 8, 0] }}
-              transition={{ duration: 1.5, repeat: Infinity }}
-              className="flex flex-col  items-center cursor-pointer text-primary sm:mt-0"
-              onClick={scrollToServices}
-            >
-              <span className="text-sm mb-2 mt-20 sm:mt-2 opacity-70 text-primary transition-colors duration-500">
-                Scroll to explore
-              </span>
-              <ChevronDown className="w-6 h-6 drop-shadow-[0_0_6px_rgba(255,145,0,0.7)]" />
-            </motion.div>
+             <motion.div
+            animate={{ y: [0, 8, 0] }}
+            transition={{ duration: 1.5, repeat: Infinity }}
+            className="flex flex-col items-center cursor-pointer text-primary sm:mt-0"
+            onClick={scrollToServices}
+          >
+            <span className="text-sm mb-2 md:mt-38 sm:mt-30 lg:mt-20 opacity-70 text-primary transition-colors duration-500">
+              Scroll to explore
+            </span>
+            <ChevronDown className="w-6 h-6 drop-shadow-[0_0_6px_rgba(255,145,0,0.7)]" />
+          </motion.div>
           </motion.div>
         </div>
       </section>

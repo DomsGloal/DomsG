@@ -293,9 +293,9 @@ function ServiceCard({
             rotate: isHovered ? 5 : 0,
           }}
           transition={{ duration: 0.3 }}
-          className={`inline-flex p-4 rounded-2xl bg-gradient-to-br ${service.color} mb-6`}
+          className={`inline-flex p-4 rounded-2xl bg-primary/10 mb-6`}
         >
-          <service.icon className="w-8 h-8 text-white" />
+          <service.icon className="w-8 h-8 text-primary" />
         </motion.div>
 
         {/* Title */}
@@ -316,13 +316,13 @@ function ServiceCard({
               initial={{ opacity: 0, x: -20 }}
               animate={{
                 opacity: isHovered ? 1 : 0.7,
-                x: isHovered ? 0 : -20,
+                // x: isHovered ? 0 : -20,
               }}
               transition={{ delay: featureIndex * 0.1 }}
               className="flex items-center text-sm text-muted-foreground"
             >
               <div
-                className={`w-2 h-2 rounded-full bg-gradient-to-r ${service.color} mr-3`}
+                className={`w-2 h-2 ml-5 rounded-full bg-gradient-to-r ${service.color} mr-3`}
               />
               {feature}
             </motion.div>

@@ -124,13 +124,13 @@ export  function IndustriesSection() {
           {industries.map((industry, index) => (
             <motion.div
               key={index}
-              className="h-38 bg-white dark:bg-card border border-gray-200 dark:border-gray-700 shadow-md rounded-2xl p-6 relative group transition-colors"
+              className="h-38  min-h-[120px] bg-white dark:bg-card border border-gray-200 dark:border-gray-700 shadow-md rounded-2xl p-6 relative group transition-colors"
               variants={cardVariants}
               whileHover="hover"
             >
               
               <h3 className="text-lg font-semibold text-gray-800 dark:text-white font-bodoni font-bold tracking-tight ">{industry}</h3>
-              <p className="flex text-sm text-gray-500 dark:text-gray-400 mt-2">Explore services</p>
+              <p className="flex text-sm text-gray-500 dark:text-gray-400 mt-14 absolute bottom-6 right-14 ">Explore</p>
 
               <motion.div
                 className="absolute bottom-4 right-4 bg-[#fd4f00] text-white p-2 rounded-full  transition-colors"
