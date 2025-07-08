@@ -191,7 +191,7 @@ export const HeroSection = () => {
  <div className="px-4 overflow-hidden">
     {/* Animated Headline */}
     <motion.h1 
-      className="text-3xl m-4 mt-12 sm:text-3xl sm:mt-0 md:text-5xl font-bold leading-snug tracking-tight mb-6 text-center"
+      className="text-3xl m-4 mt-4 sm:text-3xl sm:mt-0 md:text-5xl font-bold leading-snug tracking-tight mb-6 text-center"
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.8, ease: "easeOut" }}
