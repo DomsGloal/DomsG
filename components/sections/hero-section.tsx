@@ -73,7 +73,7 @@ export const HeroSection = () => {
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.5, opacity: 0 }}
               transition={{ duration: 1.5, ease: [0.22, 1, 0.36, 1] }}
-              className="fixed inset-0 flex items-center justify-center z-50 bg-black/50 "
+              className="fixed inset-0 flex items-center justify-center z-50  "
             >
             
               <motion.div
@@ -189,7 +189,7 @@ export const HeroSection = () => {
 </div>
 
 
-<h1 className="text-3xl mt-40 sm:text-4xl  md:text-5xl font-bold leading-snug tracking-tight mb-6 text-center">
+<h1 className=" mt-20 text-3xl sm:text-4xl  md:text-5xl font-bold leading-snug tracking-tight mb-6 text-center">
   <span className="block text-transparent bg-clip-text bg-gradient-to-r from-primary via-primary to-secondary drop-shadow-[0_2px_4px_rgba(255,145,0,0.6)]">
     Transforming Today&apos;s Ideas into Tomorrow&apos;s Impact.
   </span>
@@ -230,7 +230,7 @@ export const HeroSection = () => {
               className="flex flex-col  items-center cursor-pointer text-primary sm:mt-0"
               onClick={scrollToServices}
             >
-              <span className="text-sm mb-2 opacity-70 text-primary transition-colors duration-500">
+              <span className="text-sm mb-2 mt-20 sm:mt-2 opacity-70 text-primary transition-colors duration-500">
                 Scroll to explore
               </span>
               <ChevronDown className="w-6 h-6 drop-shadow-[0_0_6px_rgba(255,145,0,0.7)]" />
