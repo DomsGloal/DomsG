@@ -191,13 +191,13 @@ export const HeroSection = () => {
  <div className="px-4 overflow-hidden">
     {/* Animated Headline */}
     <motion.h1 
-      className="text-3xl m-4 mt-20 sm:text-4xl md:text-5xl font-bold leading-snug tracking-tight mb-6 text-center"
+      className="text-3xl m-4 mt-20 sm:text-3xl sm:mt-0 md:text-5xl font-bold leading-snug tracking-tight mb-6 text-center"
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.8, ease: "easeOut" }}
     >
       <motion.span
-        className="block text-transparent bg-clip-text bg-gradient-to-r from-primary via-primary to-secondary drop-shadow-[0_2px_4px_rgba(255,145,0,0.6)]"
+        className="block mt-10 text-transparent bg-clip-text bg-gradient-to-r from-primary via-primary to-secondary drop-shadow-[0_2px_4px_rgba(255,145,0,0.6)]"
         initial={{ backgroundPosition: '0% 50%' }}
         animate={{ backgroundPosition: '100% 50%' }}
         transition={{
