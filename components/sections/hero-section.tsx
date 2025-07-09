@@ -106,13 +106,13 @@ export const HeroSection = () => {
         {/* Background Decorations */}
         <div className="absolute inset-0 bg-radial-gradient z-0 transition-all duration-500" />
         <div className="absolute inset-0 flex items-center justify-center z-0 opacity-10 pointer-events-none">
-          <Image
+          {/* <Image
             src={DomsLogo}
             alt="DOMS Logo"
             width={600}
             height={600}
             className="object-contain mt-6 opacity-2"
-          />
+          /> */}
         </div>
 
         {/* Floating Particles */}
@@ -197,7 +197,7 @@ export const HeroSection = () => {
       transition={{ duration: 0.8, ease: "easeOut" }}
     >
       <motion.span
-        className="block mt-10 text-transparent bg-clip-text bg-gradient-to-r from-primary via-primary to-secondary drop-shadow-[0_2px_4px_rgba(255,145,0,0.6)]"
+        className="block mt-10 text-transparent bg-clip-text bg-gradient-to-r from-orange-600 to-red-600 via-primary to-secondary drop-shadow-[0_2px_4px_rgba(255,145,0,0.6)]"
         initial={{ backgroundPosition: '0% 50%' }}
         animate={{ backgroundPosition: '100% 50%' }}
         transition={{

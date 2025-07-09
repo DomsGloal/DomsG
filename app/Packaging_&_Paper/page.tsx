@@ -5,6 +5,8 @@ import { Button } from '@/components/ui/button';
 import { ArrowRight } from 'lucide-react';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
+import { useRouter } from 'next/navigation';
+import { ArrowLeft } from 'lucide-react';
 import  PackageIMG from "../../lib/industriesImages/packageIMG.jpg";
 import  PackageBG from "../../lib/industriesImages/PackagingBG.jpg";
 
@@ -39,6 +41,7 @@ const hoverCard = {
 };
 
 export default function PackagingPaperPage() {
+  const router = useRouter();
   return (
     <div className="relative">
       {/* Background Image with Overlay */}

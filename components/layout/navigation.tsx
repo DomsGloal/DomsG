@@ -171,7 +171,7 @@ export function Navigation() {
                       initial="initial"
                       animate="animate"
                       whileHover="hover"
-                      className="text-lg sm:text-xl md:text-2xl font-bodoni font-light tracking-tight text-gray-900 dark:text-white"
+                      className="text-lg sm:text-xl md:text-2xl font-bodoni font-semibold tracking-tight text-gray-800 dark:text-white"
                     >
                       {letter}
                     </motion.span>
@@ -181,7 +181,7 @@ export function Navigation() {
                     initial="initial"
                     animate="animate"
                     whileHover="hover"
-                    className="ml-1 sm:ml-2 text-lg sm:text-xl md:text-2xl font-bodoni font-light tracking-tight text-gray-900 dark:text-white"
+                    className="ml-1 sm:ml-2 text-lg sm:text-xl md:text-2xl font-bodoni font-semibold tracking-tight text-gray-800 dark:text-white"
                   >
                     GLOBAL
                   </motion.span>

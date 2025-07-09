@@ -5,6 +5,8 @@ import { Button } from '@/components/ui/button';
 import { ArrowRight } from 'lucide-react';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
+import { useRouter } from 'next/navigation';
+import { ArrowLeft } from 'lucide-react';
 import RealIMG from '../../lib/industriesImages/RealIMG.jpg';
 import RealBG from '../../lib/industriesImages/RealBG.jpg';
 
@@ -39,6 +41,7 @@ const hoverCard = {
 };
 
 export default function RealEstatePage() {
+  const router = useRouter();
   return (
     <div className="relative">
       {/* Background Image with Overlay */}
@@ -60,6 +63,18 @@ export default function RealEstatePage() {
         variants={container}
         className="px-4 sm:px-6 lg:px-20 py-16 text-gray-100 max-w-7xl mx-auto relative"
       >
+
+        <motion.button
+          onClick={() => router.back()}
+          className="flex items-center gap-2 text-white mb-6 hover:underline"
+          initial={{ opacity: 0, x: -10 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.4 }}
+        >
+          <ArrowLeft size={18} />
+          <span className="text-base">Go Back</span>
+        </motion.button>
+
         {/* Hero Section */}
         <div className="flex flex-col lg:flex-row gap-12 mb-16">
           <motion.div variants={item} className="lg:w-2/3">

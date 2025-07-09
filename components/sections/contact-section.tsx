@@ -20,7 +20,7 @@ const contactInfo = [
     icon: Phone,
     title: 'Call Us',
     details: '+91 7032222707',
-    subDetails: 'Mon-Fri 10AM-6PM EST',
+    subDetails: 'Mon-Fri 10AM-6PM IST',
   },
   {
     icon: MapPin,
@@ -32,7 +32,7 @@ const contactInfo = [
     icon: Clock,
     title: 'Business Hours',
     details: 'Monday - Friday',
-    subDetails: '9:00 AM - 6:00 PM EST',
+    subDetails: '9:00 AM - 6:00 PM IST',
   },
 ];
 

@@ -2,6 +2,7 @@
 
 import React from 'react';
 import { ArrowUpRight } from 'lucide-react';
+import { ArrowLeft } from 'lucide-react';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
 
@@ -86,6 +87,7 @@ const iconVariants = {
 };
 
 export  function IndustriesSection() {
+
   return (
     <section className="py-24 bg-muted/30" id="industries">
       <div className="container-custom px-6 md:px-16">
@@ -96,6 +98,7 @@ export  function IndustriesSection() {
           whileInView="visible"
           viewport={{ once: true }}
         >
+          
           <motion.h2
             className="text-4xl md:text-5xl lg:text-6xl font-bold mb-4 font-heading text-balance"
             initial={{ opacity: 0, y: 20 }}
