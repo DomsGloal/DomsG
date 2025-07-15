@@ -6,7 +6,7 @@ import { useInView } from 'react-intersection-observer';
 import { Mail, Phone, MapPin, Linkedin, Twitter, Github, ArrowUp } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import Image from 'next/image';
-import DomsLogo from '../../lib/DOMS-logo1.png';
+
 
 const footerLinks = {
   company: [
@@ -90,7 +90,7 @@ export function Footer() {
               <div className="flex items-center space-x-3 mb-6">
                 <div className="w-10 h-10  rounded-lg flex items-center justify-center">
                   {/* <span className="text-white font-bold text-xl font-heading">D</span> */}
-                 <Image src={DomsLogo} alt="DOMS Global Logo" width={80} height={80} priority />
+                 <Image src='/fevicon.png' alt="DOMS Global Logo" width={80} height={80} priority />
                 </div>
                 <span className="text-2xl  font-bodoni font-light  tracking-tight  text-foreground">
                   DOMS Global
