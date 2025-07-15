@@ -7,7 +7,7 @@ import { useTheme } from 'next-themes';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
 import Image from 'next/image';
-// import DomsLogo from '/fevicon.png';
+import DomsLogo from '../../lib/DOMS-logo1.png';
 
 const navItems = [
   { name: 'Home', href: '#hero' },
@@ -131,7 +131,7 @@ export function Navigation() {
                 className="relative flex-shrink-0"
               >
                 <Image 
-                  src='/fevicon'
+                  src={DomsLogo} 
                   alt="DOMS Global Logo" 
                   width={40} 
                   height={40} 

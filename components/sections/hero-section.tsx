@@ -5,7 +5,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronDown } from 'lucide-react';
 import { useTheme } from 'next-themes';
 import Image from 'next/image';
-
+import DomsLogo from '../../lib/DOMS-logo1.png';
 
 export const HeroSection = () => {
   const { resolvedTheme } = useTheme();
@@ -83,7 +83,7 @@ export const HeroSection = () => {
                 transition={{ delay: 0.5, duration: 1 }}
               >
                 <Image
-                  src='/fevicon.png'
+                  src={DomsLogo}
                   alt="DOMS GLOBAL Logo"
                   width={300}
                   height={300}
@@ -107,7 +107,7 @@ export const HeroSection = () => {
         <div className="absolute inset-0 bg-radial-gradient z-0 transition-all duration-500" />
         <div className="absolute inset-0 flex items-center justify-center z-0 opacity-10 pointer-events-none">
           {/* <Image
-            src='/fevicon.png'
+            src={DomsLogo}
             alt="DOMS Logo"
             width={600}
             height={600}
