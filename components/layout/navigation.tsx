@@ -131,7 +131,7 @@ export function Navigation() {
                 className="relative flex-shrink-0"
               >
                 <Image 
-                  src='/fevicon.png'
+                  src='/fevicon'
                   alt="DOMS Global Logo" 
                   width={40} 
                   height={40} 
