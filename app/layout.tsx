@@ -3,6 +3,7 @@ import type { Metadata } from 'next';
 import { Inter, IBM_Plex_Sans, Poppins, Bodoni_Moda } from 'next/font/google';
 import { ThemeProvider } from '@/components/providers/theme-provider';
 import { Toaster } from '@/components/ui/sonner';
+import Script from 'next/script';
 
 
 // Load Google Fonts using next/font/google
@@ -84,8 +85,31 @@ export default function RootLayout({
       <head>
         <link rel="icon" href="/fevicon.png" />
         {/* Add any additional head elements here */}
+            <head>
+        {/* Google Tag Manager Script (non-blocking) */}
+        <Script
+          id="gtm-init"
+          strategy="afterInteractive"
+          dangerouslySetInnerHTML={{
+            __html: `(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+              new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+              j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+              'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+              })(window,document,'script','dataLayer','GTM-MHKM4J55');`,
+          }}
+        />
+      </head>
       </head>
       <body className="font-body antialiased">
+          {/* GTM NoScript fallback */}
+        <noscript>
+          <iframe
+            src="https://www.googletagmanager.com/ns.html?id=GTM-MHKM4J55"
+            height="0"
+            width="0"
+            style={{ display: 'none', visibility: 'hidden' }}
+          />
+        </noscript>
         <ThemeProvider
           attribute="class"
           defaultTheme="light"
