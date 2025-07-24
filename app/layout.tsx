@@ -82,10 +82,12 @@ export default function RootLayout({
       suppressHydrationWarning
       className={`${inter.variable} ${ibmPlexSans.variable} ${poppins.variable} ${bodoni.variable}`}
     >
-      <head>
+      <head> 
+        <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
+
         <link rel="icon" href="/fevicon.png" />
         {/* Add any additional head elements here */}
-            <head>
+            
         {/* Google Tag Manager Script (non-blocking) */}
         <Script
           id="gtm-init"
@@ -98,7 +100,7 @@ export default function RootLayout({
               })(window,document,'script','dataLayer','GTM-MHKM4J55');`,
           }}
         />
-      </head>
+      
       </head>
       <body className="font-body antialiased">
           {/* GTM NoScript fallback */}
