@@ -39,7 +39,7 @@ export const metadata: Metadata = {
   description:
     "DOMS Global is a leading innovation company transforming today's ideas into tomorrow's impact through cutting-edge solutions and professional excellence.",
   icons: {
-    icon: "/fevicon.png",
+    icon: "/icon.png",
   },
   keywords: 'innovation, technology, consulting, digital transformation, business solutions',
   authors: [{ name: 'DOMS Global' }],
@@ -85,7 +85,7 @@ export default function RootLayout({
       <head> 
         <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
 
-        <link rel="icon" href="/fevicon.png" />
+        <link rel="icon" href="/icon.png" />
         {/* Add any additional head elements here */}
             
         {/* Google Tag Manager Script (non-blocking) */}
